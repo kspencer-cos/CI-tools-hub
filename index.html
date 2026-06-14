@@ -646,6 +646,7 @@ const TOOLS = {
     desc: 'AI-assisted ESDS-compliant session notes with caregiver signature capture. Built for Early Steps providers.',
     url: 'https://session-notes-ten.vercel.app',
     authType: 'key',     // passes ?key=LICENSE_KEY in URL
+    staffKey: 'CI-STAFF-2026',
     badge: 'included',
     section: 'daily',
   },
@@ -717,8 +718,12 @@ function buildCard(tool, hasAccess) {
 
   // Build launch URL based on authType
   let launchUrl = tool.url;
-  if (tool.authType === 'key' && currentKey && !currentKey.includes('@')) {
-  launchUrl = `${tool.url}?key=${encodeURIComponent(currentKey)}`;
+  if (tool.authType === 'key') {
+  const keyToPass = (currentKey && !currentKey.includes('@'))
+    ? currentKey
+    : tool.staffKey || '';
+  if (keyToPass) launchUrl = `${tool.url}?key=${encodeURIComponent(keyToPass)}`;
+}
 } else if (tool.authType === 'email' && currentKey && currentKey.includes('@')) {
   launchUrl = `${tool.url}?email=${encodeURIComponent(currentKey)}`;
 }
