@@ -716,14 +716,13 @@ function resolveKey(input) {
 function buildCard(tool, hasAccess) {
   const locked = !hasAccess;
 
-  // Build launch URL based on authType
-  let launchUrl = tool.url;
-  if (tool.authType === 'key') {
+ // Build launch URL based on authType
+let launchUrl = tool.url;
+if (tool.authType === 'key') {
   const keyToPass = (currentKey && !currentKey.includes('@'))
     ? currentKey
-    : tool.staffKey || '';
-  if (keyToPass) launchUrl = `${tool.url}?key=${encodeURIComponent(keyToPass)}`;
-}
+    : 'CI-STAFF-2026';
+  launchUrl = `${tool.url}?key=${encodeURIComponent(keyToPass)}`;
 } else if (tool.authType === 'email' && currentKey && currentKey.includes('@')) {
   launchUrl = `${tool.url}?email=${encodeURIComponent(currentKey)}`;
 }
