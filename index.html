@@ -563,7 +563,7 @@
       <span>
         <strong>Provider Management</strong> requires a one-time Google Sheets setup before first use.
         Open the tool and follow the setup instructions, or
-        <a href="mailto:support@childhoodinterventions.com" style="color:var(--blue)">email us</a> for help.
+        <a href="mailto:info@childhoodinterventions.com" style="color:var(--blue)">email us</a> for help.
       </span>
     </div>
 
@@ -607,12 +607,16 @@ const PLANS = {
 
   // Internal / staff key — full access, no purchase required
   'CI-STAFF-2026': { name: 'Staff',           tools: ['cos','reviews','notes','management','library', 'flepic'] },
+  // Owner email — always full access
+  'kspencer@childhoodinterventions.com': { name: 'Owner', tools: ['cos','reviews','notes','management','library','flepic'] },
 
   // Email-based fallback: if user enters an email, grant them the
   // same tools their Gumroad purchase covers. In production you'd
   // validate this against your Gumroad API. For now, any @-address
   // gets the Provider Bundle so you can onboard staff instantly.
   '__email__': { name: 'Provider Bundle',     tools: ['cos','reviews','notes','management','library'] },
+  'KSPENCER@CHILDHOODINTERVENTIONS.COM': { name: 'Owner', tools: ['cos','reviews','notes','management','library','flepic'] },
+  'CSOLOMON@CHILDHOODINTERVENTIONS.COM': { name: 'Owner', tools: ['cos','reviews','notes','management','library','flepic'] },
 };
 
 const TOOLS = {
@@ -706,15 +710,15 @@ function resolveKey(input) {
   const trimmed = input.trim();
   if (!trimmed) return null;
 
-  // Email address → email plan
-  if (trimmed.includes('@')) {
-    return { key: trimmed, plan: PLANS['__email__'] };
-  }
-
-  // Exact key match (case-insensitive)
+  // Exact key match first (case-insensitive) — catches named emails too
   const upper = trimmed.toUpperCase();
   if (PLANS[upper]) {
     return { key: upper, plan: PLANS[upper] };
+  }
+
+  // Email address fallback → generic email plan
+  if (trimmed.includes('@')) {
+    return { key: trimmed, plan: PLANS['__email__'] };
   }
 
   return null;
