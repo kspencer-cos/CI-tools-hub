@@ -268,7 +268,7 @@
     }
 
     /* ── TOOL GRID ── */
-    .tools-grid {
+    .-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
@@ -603,10 +603,10 @@ const PLANS = {
 
   // Bundle keys
   'CI-BUNDLE-PROVIDER': { name: 'Provider Bundle', tools: ['cos','reviews','notes','management','library'] },
-  'CI-TEAM-2026':       { name: 'Team License',     tools: ['cos','reviews','notes','management','library'] },
+  'CI-TEAM-2026':       { name: 'Team License',     tools: ['cos','reviews','notes','management','library', 'flepic'] },
 
   // Internal / staff key — full access, no purchase required
-  'CI-STAFF-2026': { name: 'Staff',           tools: ['cos','reviews','notes','management','library'] },
+  'CI-STAFF-2026': { name: 'Staff',           tools: ['cos','reviews','notes','management','library', 'flepic'] },
 
   // Email-based fallback: if user enters an email, grant them the
   // same tools their Gumroad purchase covers. In production you'd
@@ -672,6 +672,16 @@ const TOOLS = {
     badge: 'free',
     section: 'daily',
   },
+  flepic: {
+  id: 'flepic',
+  title: 'FL-EPIC Session Guide',
+  icon: '📋',
+  color: '#1B5E6E',
+  desc: 'Home visiting practice indicators, 5Q model, FOMPA targets, and SE practices — all in one session guide.',
+  url: 'https://flepic.childhoodinterventions.com',
+  authType: 'none',
+  badge: 'free',
+  section: 'resources',
 };
 
 // ══════════════════════════════════════════
