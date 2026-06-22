@@ -505,28 +505,37 @@
     </div>
 
     <h1>Sign in to your tools</h1>
-    <p>Enter your license key or the email address you used to purchase.</p>
+    <p>Enter your email and password to access your provider tools.</p>
 
-    <label class="field-label" for="auth-input">License key or email</label>
+    <label class="field-label" for="auth-email">Email</label>
     <input
       class="field-input"
-      id="auth-input"
-      type="text"
-      placeholder="CI-XXXX-XXXX or you@example.com"
-      autocomplete="off"
+      id="auth-email"
+      type="email"
+      placeholder="you@example.com"
+      autocomplete="email"
       autocapitalize="none"
       spellcheck="false"
     />
 
-    <button class="login-btn" id="login-btn">Access my tools →</button>
+    <label class="field-label" for="auth-password" style="margin-top:14px">Password</label>
+    <input
+      class="field-input"
+      id="auth-password"
+      type="password"
+      placeholder="Your password"
+      autocomplete="current-password"
+    />
+
+    <button class="login-btn" id="login-btn">Sign in →</button>
 
     <div class="login-error" id="login-error">
-      That key or email wasn't recognized. Check your purchase confirmation email or
-      <a href="mailto:support@childhoodinterventions.com">contact support</a>.
+      Invalid email or password.
+      <a href="mailto:support@childhoodinterventions.com">Contact support</a> if you need help.
     </div>
 
     <p class="login-help">
-      Don't have a license? <a href="https://childhoodinterventions.com/provider-support" target="_blank">See pricing →</a>
+      Need access? <a href="mailto:support@childhoodinterventions.com">Contact us →</a>
     </p>
   </div>
 </div>
@@ -592,32 +601,8 @@
 
 <script>
 // ══════════════════════════════════════════
-// CONFIG — edit this to add/remove tools or
-// change which plans unlock which tools
+// TOOLS CONFIG
 // ══════════════════════════════════════════
-const PLANS = {
-  // Individual tool keys (from Gumroad)
-  'COS-DEMO':    { name: 'COS Only',         tools: ['cos'] },
-  'REV-DEMO':    { name: 'Reviews Only',      tools: ['reviews'] },
-  'NOTES-DEMO':  { name: 'Session Notes',     tools: ['notes'] },
-
-  // Bundle keys
-  'CI-BUNDLE-PROVIDER': { name: 'Provider Bundle', tools: ['cos','reviews','notes','management','library'] },
-  'CI-TEAM-2026':       { name: 'Team License',     tools: ['cos','reviews','notes','management','library', 'flepic'] },
-
-  // Internal / staff key — full access, no purchase required
-  'CI-STAFF-2026': { name: 'Staff',           tools: ['cos','reviews','notes','management','library', 'flepic'] },
-  // Owner email — always full access
-  'kspencer@childhoodinterventions.com': { name: 'Owner', tools: ['cos','reviews','notes','management','library','flepic'] },
-
-  // Email-based fallback: if user enters an email, grant them the
-  // same tools their Gumroad purchase covers. In production you'd
-  // validate this against your Gumroad API. For now, any @-address
-  // gets the Provider Bundle so you can onboard staff instantly.
-  '__email__': { name: 'Provider Bundle',     tools: ['cos','reviews','notes','management','library'] },
-  'KSPENCER@CHILDHOODINTERVENTIONS.COM': { name: 'Owner', tools: ['cos','reviews','notes','management','library','flepic'] },
-  'CSOLOMON@CHILDHOODINTERVENTIONS.COM': { name: 'Owner', tools: ['cos','reviews','notes','management','library','flepic'] },
-};
 
 const TOOLS = {
   cos: {
@@ -692,37 +677,25 @@ const TOOLS = {
 // ══════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════
-let currentKey  = null;
-let currentPlan = null;
+let currentSession = null; // { token, name, tools[], email }
 
-function getStoredKey() {
-  try { return localStorage.getItem('ci_license_key'); } catch { return null; }
+function getStoredSession() {
+  try { return JSON.parse(localStorage.getItem('ci_session')); } catch { return null; }
+}
+function storeSession(s) {
+  try { localStorage.setItem('ci_session', JSON.stringify(s)); } catch {}
+}
+function clearSession() {
+  try { localStorage.removeItem('ci_session'); } catch {}
 }
 
-function storeKey(key) {
-  try { localStorage.setItem('ci_license_key', key); } catch {}
-}
-
-function clearKey() {
-  try { localStorage.removeItem('ci_license_key'); } catch {}
-}
-
-function resolveKey(input) {
-  const trimmed = input.trim();
-  if (!trimmed) return null;
-
-  // Exact key match first (case-insensitive) — catches named emails too
-  const upper = trimmed.toUpperCase();
-  if (PLANS[upper]) {
-    return { key: upper, plan: PLANS[upper] };
-  }
-
-  // Email address fallback → generic email plan
-  if (trimmed.includes('@')) {
-    return { key: trimmed, plan: PLANS['__email__'] };
-  }
-
-  return null;
+async function callAuth(body) {
+  const res = await fetch('/api/auth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  return res.json();
 }
 
 // ══════════════════════════════════════════
@@ -731,16 +704,12 @@ function resolveKey(input) {
 function buildCard(tool, hasAccess) {
   const locked = !hasAccess;
 
- // Build launch URL based on authType
-let launchUrl = tool.url;
-if (tool.authType === 'key') {
-  const keyToPass = (currentKey && !currentKey.includes('@'))
-    ? currentKey
-    : 'CI-STAFF-2026';
-  launchUrl = `${tool.url}?key=${encodeURIComponent(keyToPass)}`;
-} else if (tool.authType === 'email' && currentKey && currentKey.includes('@')) {
-  launchUrl = `${tool.url}?email=${encodeURIComponent(currentKey)}`;
-}
+  let launchUrl = tool.url;
+  if (tool.authType === 'email' && currentSession?.email) {
+    launchUrl = `${tool.url}?email=${encodeURIComponent(currentSession.email)}`;
+  } else if (tool.authType === 'key') {
+    launchUrl = `${tool.url}?key=CI-STAFF-2026`;
+  }
 
   const authNote =
     tool.authType === 'email'  ? 'opens with your email' :
@@ -782,91 +751,99 @@ if (tool.authType === 'key') {
     </div>`;
 }
 
-function renderDashboard(key, plan) {
-  currentKey  = key;
-  currentPlan = plan;
+function renderDashboard(session) {
+  currentSession = session;
 
-  // Top bar
-  document.getElementById('plan-badge').textContent = plan.name;
-  document.getElementById('welcome-heading').textContent =
-    key.includes('@') ? `Welcome back` : `Your provider tools`;
-  document.getElementById('welcome-sub').textContent =
-    `Signed in as ${key} · ${plan.name} plan`;
+  document.getElementById('plan-badge').textContent = 'Provider';
+  document.getElementById('welcome-heading').textContent = `Welcome back, ${session.name.split(' ')[0]}`;
+  document.getElementById('welcome-sub').textContent = `Signed in as ${session.email}`;
 
-  // Key display
-  document.getElementById('key-display-val').textContent = key;
+  // Hide key display — not relevant for account-based login
+  const keyDisplay = document.querySelector('.key-display');
+  if (keyDisplay) keyDisplay.style.display = 'none';
 
-  // Show/hide setup notice
-  const hasManagement = plan.tools.includes('management');
+  const hasManagement = session.tools.includes('management');
   document.getElementById('setup-notice').style.display = hasManagement ? 'flex' : 'none';
 
-  // Render grids
   const sections = { daily: 'grid-daily', clinical: 'grid-clinical', resources: 'grid-resources' };
   Object.entries(sections).forEach(([section, gridId]) => {
     const sectionTools = Object.values(TOOLS).filter(t => t.section === section);
-    const html = sectionTools.map(t => buildCard(t, plan.tools.includes(t.id))).join('');
+    const html = sectionTools.map(t => buildCard(t, session.tools.includes(t.id))).join('');
     document.getElementById(gridId).innerHTML = html;
   });
 
-  // Show dashboard
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
+}
+
+function showLoginError(msg) {
+  const errEl = document.getElementById('login-error');
+  errEl.textContent = msg + ' ';
+  const link = document.createElement('a');
+  link.href = 'mailto:support@childhoodinterventions.com';
+  link.textContent = 'Contact support';
+  errEl.appendChild(link);
+  errEl.style.display = 'block';
 }
 
 // ══════════════════════════════════════════
 // EVENTS
 // ══════════════════════════════════════════
-document.getElementById('login-btn').addEventListener('click', () => {
-  const input = document.getElementById('auth-input').value;
-  const result = resolveKey(input);
-  const errEl  = document.getElementById('login-error');
+document.getElementById('login-btn').addEventListener('click', async () => {
+  const email    = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const btn      = document.getElementById('login-btn');
+  const errEl    = document.getElementById('login-error');
 
-  if (!result) {
-    errEl.style.display = 'block';
-    return;
-  }
+  if (!email || !password) { showLoginError('Please enter your email and password.'); return; }
 
   errEl.style.display = 'none';
-  storeKey(result.key);
-  renderDashboard(result.key, result.plan);
+  btn.textContent = 'Signing in…';
+  btn.disabled = true;
+
+  try {
+    const data = await callAuth({ action: 'login', email, password });
+    if (!data.ok) { showLoginError(data.error || 'Invalid email or password.'); return; }
+    const session = { token: data.token, name: data.name, email, tools: data.tools, gasUrl: data.gasUrl };
+    storeSession(session);
+    renderDashboard(session);
+  } catch {
+    showLoginError('Connection error — please try again.');
+  } finally {
+    btn.textContent = 'Sign in →';
+    btn.disabled = false;
+  }
 });
 
-document.getElementById('auth-input').addEventListener('keydown', e => {
+document.getElementById('auth-password').addEventListener('keydown', e => {
   if (e.key === 'Enter') document.getElementById('login-btn').click();
 });
 
 document.getElementById('signout-btn').addEventListener('click', () => {
-  clearKey();
-  currentKey = currentPlan = null;
-  document.getElementById('auth-input').value = '';
+  clearSession();
+  currentSession = null;
+  document.getElementById('auth-email').value = '';
+  document.getElementById('auth-password').value = '';
+  document.getElementById('login-error').style.display = 'none';
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('login-screen').style.display = 'flex';
 });
 
-document.getElementById('key-copy-btn').addEventListener('click', () => {
-  if (!currentKey) return;
-  navigator.clipboard.writeText(currentKey).then(() => {
-    const btn = document.getElementById('key-copy-btn');
-    btn.textContent = 'Copied!';
-    setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
-  });
-});
-
 // ══════════════════════════════════════════
-// AUTO-LOGIN from localStorage or URL param
+// AUTO-LOGIN — verify stored session token
 // ══════════════════════════════════════════
-(function () {
-  // Support ?key=CI-XXXX in the URL (e.g. from a Gumroad thank-you redirect)
-  const params = new URLSearchParams(window.location.search);
-  const urlKey = params.get('key');
-
-  const keyToTry = urlKey || getStoredKey();
-  if (!keyToTry) return;
-
-  const result = resolveKey(keyToTry);
-  if (result) {
-    storeKey(result.key);
-    renderDashboard(result.key, result.plan);
+(async function () {
+  const stored = getStoredSession();
+  if (!stored?.token) return;
+  try {
+    const data = await callAuth({ action: 'verify', token: stored.token });
+    if (data.ok) {
+      renderDashboard({ ...stored, name: data.name, tools: data.tools, email: data.email });
+    } else {
+      clearSession();
+    }
+  } catch {
+    // Network error — show login, don't clear session so they can retry
   }
 })();
 </script>
