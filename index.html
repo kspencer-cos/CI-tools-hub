@@ -709,6 +709,8 @@ function buildCard(tool, hasAccess) {
     launchUrl = `${tool.url}?email=${encodeURIComponent(currentSession.email)}`;
   } else if (tool.authType === 'key') {
     launchUrl = `${tool.url}?key=CI-STAFF-2026`;
+  } else if (tool.authType === 'setup' && currentSession?.gasUrl) {
+    launchUrl = `${tool.url}?gas=${encodeURIComponent(currentSession.gasUrl)}`;
   }
 
   const authNote =
