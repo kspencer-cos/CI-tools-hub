@@ -567,15 +567,6 @@
       <p id="welcome-sub">Select a tool below to open it. Your session stays active across visits.</p>
     </div>
 
-    <div class="notice" id="setup-notice" style="display:none">
-      <span class="notice-icon">⚠️</span>
-      <span>
-        <strong>Provider Management</strong> requires a one-time Google Sheets setup before first use.
-        Open the tool and follow the setup instructions, or
-        <a href="mailto:info@childhoodinterventions.com" style="color:var(--blue)">email us</a> for help.
-      </span>
-    </div>
-
     <!-- DAILY USE -->
     <div class="section-label">Daily use</div>
     <div class="tools-grid" id="grid-daily"></div>
@@ -612,7 +603,7 @@ const TOOLS = {
     color: '#2d5a8a',
     desc: 'Child Outcome Summary documentation with AI-assisted narrative generation and IFSP-ready export.',
     url: 'https://cos.childhoodinterventions.com',
-    authType: 'email',   // opens tool; user logs in with their email there
+    authType: 'email',
     badge: 'included',
     section: 'clinical',
   },
@@ -634,7 +625,7 @@ const TOOLS = {
     color: '#2a7d4f',
     desc: 'AI-assisted ESDS-compliant session notes with caregiver signature capture. Built for Early Steps providers.',
     url: 'https://session-notes-ten.vercel.app',
-    authType: 'key',     // passes ?key=LICENSE_KEY in URL
+    authType: 'key',
     staffKey: 'CI-STAFF-2026',
     badge: 'included',
     section: 'daily',
@@ -646,8 +637,8 @@ const TOOLS = {
     color: '#b45309',
     desc: 'CONT billing, ESDS reconciliation, travel vouchers, and caseload tracking — backed by Google Sheets.',
     url: 'https://early-steps-provider-management.vercel.app',
-    authType: 'setup',   // requires GAS one-time setup
-    badge: 'setup',
+    authType: 'none',
+    badge: 'included',
     section: 'daily',
   },
   library: {
@@ -657,27 +648,27 @@ const TOOLS = {
     color: '#6b46c1',
     desc: '243 family-facing activity cards for toddlers with developmental differences. No login required.',
     url: 'https://ei-everywhere-library.vercel.app',
-    authType: 'none',    // public, just link out
+    authType: 'none',
     badge: 'free',
     section: 'daily',
   },
   flepic: {
-  id: 'flepic',
-  title: 'FL-EPIC Session Guide',
-  icon: '📋',
-  color: '#1B5E6E',
-  desc: 'Home visiting practice indicators, 5Q model, FOMPA targets, and SE practices — all in one session guide.',
-  url: 'https://flepic.childhoodinterventions.com',
-  authType: 'none',
-  badge: 'free',
-  section: 'resources',
+    id: 'flepic',
+    title: 'FL-EPIC Session Guide',
+    icon: '📋',
+    color: '#1B5E6E',
+    desc: 'Home visiting practice indicators, 5Q model, FOMPA targets, and SE practices — all in one session guide.',
+    url: 'https://flepic.childhoodinterventions.com',
+    authType: 'none',
+    badge: 'free',
+    section: 'resources',
   },
 };
 
 // ══════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════
-let currentSession = null; // { token, name, tools[], email }
+let currentSession = null;
 
 function getStoredSession() {
   try { return JSON.parse(localStorage.getItem('ci_session')); } catch { return null; }
@@ -709,14 +700,11 @@ function buildCard(tool, hasAccess) {
     launchUrl = `${tool.url}?email=${encodeURIComponent(currentSession.email)}`;
   } else if (tool.authType === 'key') {
     launchUrl = `${tool.url}?key=CI-STAFF-2026`;
-  } else if (tool.authType === 'setup' && currentSession?.gasUrl) {
-    launchUrl = `${tool.url}?gas=${encodeURIComponent(currentSession.gasUrl)}`;
   }
 
   const authNote =
-    tool.authType === 'email'  ? 'opens with your email' :
-    tool.authType === 'key'    ? 'key passed automatically' :
-    tool.authType === 'setup'  ? 'one-time setup required' :
+    tool.authType === 'email' ? 'opens with your email' :
+    tool.authType === 'key'   ? 'key passed automatically' :
     'no sign-in needed';
 
   const badgeLabel =
@@ -731,9 +719,7 @@ function buildCard(tool, hasAccess) {
 
   const btnHtml = locked
     ? `<span class="launch-btn btn-setup" style="cursor:default">🔒 Not in your plan</span>`
-    : tool.authType === 'setup'
-      ? `<a class="launch-btn btn-setup" href="${launchUrl}" target="_blank" rel="noopener">Open & set up ↗</a>`
-      : `<a class="launch-btn btn-primary" href="${launchUrl}" target="_blank" rel="noopener">Launch ↗</a>`;
+    : `<a class="launch-btn btn-primary" href="${launchUrl}" target="_blank" rel="noopener">Launch ↗</a>`;
 
   return `
     <div class="tool-card${locked ? ' locked' : ''}">
@@ -760,12 +746,8 @@ function renderDashboard(session) {
   document.getElementById('welcome-heading').textContent = `Welcome back, ${session.name.split(' ')[0]}`;
   document.getElementById('welcome-sub').textContent = `Signed in as ${session.email}`;
 
-  // Hide key display — not relevant for account-based login
   const keyDisplay = document.querySelector('.key-display');
   if (keyDisplay) keyDisplay.style.display = 'none';
-
-  const hasManagement = session.tools.includes('management');
-  document.getElementById('setup-notice').style.display = hasManagement ? 'flex' : 'none';
 
   const sections = { daily: 'grid-daily', clinical: 'grid-clinical', resources: 'grid-resources' };
   Object.entries(sections).forEach(([section, gridId]) => {
@@ -832,7 +814,7 @@ document.getElementById('signout-btn').addEventListener('click', () => {
 });
 
 // ══════════════════════════════════════════
-// AUTO-LOGIN — verify stored session token
+// AUTO-LOGIN
 // ══════════════════════════════════════════
 (async function () {
   const stored = getStoredSession();
@@ -845,7 +827,7 @@ document.getElementById('signout-btn').addEventListener('click', () => {
       clearSession();
     }
   } catch {
-    // Network error — show login, don't clear session so they can retry
+    // Network error — show login, don't clear session
   }
 })();
 </script>
