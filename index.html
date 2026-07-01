@@ -245,6 +245,15 @@
 
     .topbar-signout:hover { color: rgba(255,255,255,0.9); }
 
+    .topbar-guides {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      padding: 4px 0;
+      transition: color 0.15s;
+    }
+    .topbar-guides:hover { color: rgba(255,255,255,0.9); }
+
     .main {
       max-width: 960px;
       margin: 0 auto;
@@ -557,6 +566,7 @@
     </div>
     <div class="topbar-right">
       <span class="topbar-plan" id="plan-badge">—</span>
+      <a href="/guides/" class="topbar-guides" target="_blank">User Guides</a>
       <button class="topbar-signout" id="signout-btn">Sign out</button>
     </div>
   </nav>

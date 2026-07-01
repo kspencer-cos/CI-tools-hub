@@ -116,7 +116,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
   <!-- OVERVIEW -->
   <div class="section" id="overview">
     <div class="section-heading"><div class="section-heading-icon">📊</div>Overview</div>
-    <p class="prose">Provider Management connects your Google Calendar and Google Sheets billing spreadsheet to give you a live command center for your Early Steps practice. All your billing, scheduling, and caseload data lives in <strong>your own Google account</strong> — nothing is stored on our servers.</p>
+    <p class="prose">Provider Management connects your Google Sheets billing spreadsheet to give you a live command center for your Early Steps practice. All your billing, scheduling, and caseload data lives in <strong>your own Google Drive</strong> — nothing is stored on our servers.</p>
 
     <!-- Illustration: hub and spoke -->
     <div class="illustration">
@@ -189,7 +189,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
   <!-- SETUP -->
   <div class="section" id="setup">
     <div class="section-heading"><div class="section-heading-icon">⚙️</div>Initial Setup</div>
-    <p class="prose">Provider Management requires a one-time connection to your Google account. Your data lives entirely in your own Google Drive — we never store it on our servers.</p>
+    <p class="prose">Provider Management connects directly to your Google Sheet via your Google account. Setup takes about two minutes — you only do it once.</p>
 
     <div class="callout callout-tip">
       <div class="callout-icon">📋</div>
@@ -207,36 +207,24 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
       <div class="step-card">
         <div class="step-num">2</div>
         <div class="step-content">
-          <div class="step-title">Open Apps Script and paste Code.gs</div>
-          <div class="step-desc">In your copy of the spreadsheet, go to <em>Extensions → Apps Script</em>. Delete any existing code and paste the full contents of <strong>Code.gs</strong> (provided by Childhood Interventions). Save the script (Ctrl/Cmd + S).</div>
+          <div class="step-title">Open Provider Management and sign in with Google</div>
+          <div class="step-desc">Open Provider Management from the Hub. A setup screen appears on first load. Click <em>Sign in with Google</em> and authorize access using the same Google account that owns your spreadsheet.</div>
         </div>
       </div>
       <div class="step-card">
         <div class="step-num">3</div>
         <div class="step-content">
-          <div class="step-title">Run any function to authorize Google access</div>
-          <div class="step-desc">In the Apps Script editor, select any function from the dropdown and click <em>Run</em>. Follow the Google authorization dialog to grant Calendar and Sheets access. Use the same Google account that owns the spreadsheet.</div>
+          <div class="step-title">Paste your Google Sheet URL</div>
+          <div class="step-desc">Open your copy of the spreadsheet in Google Sheets and copy the URL from your browser's address bar. Paste it into the Sheet URL field in the setup screen — it will look like <code>https://docs.google.com/spreadsheets/d/…</code></div>
         </div>
       </div>
       <div class="step-card">
         <div class="step-num">4</div>
         <div class="step-content">
-          <div class="step-title">Deploy as a Web App</div>
-          <div class="step-desc">Click <em>Deploy → New deployment</em>. Set <em>Execute as: Me</em> and <em>Who has access: Anyone</em>. Click <em>Deploy</em> and copy the <code>/exec</code> URL.</div>
+          <div class="step-title">Fill in your details and click Get Started</div>
+          <div class="step-desc">Enter your name, discipline, home address (for travel mileage), and FLEPIC billing rate. Click <em>Get Started</em> — the app will load your caseload and schedule immediately.</div>
         </div>
       </div>
-      <div class="step-card">
-        <div class="step-num">5</div>
-        <div class="step-content">
-          <div class="step-title">Connect the app</div>
-          <div class="step-desc">Open Provider Management from the Hub. On first load, a setup screen will appear. Paste your <code>/exec</code> URL, enter your name and home address (for travel calculations), and save.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout callout-warn">
-      <div class="callout-icon">🔄</div>
-      <div class="callout-text"><strong>Redeploying after code updates:</strong> When Childhood Interventions provides an updated Code.gs, you must create a <em>New Deployment</em> (not update the existing one) and paste the new /exec URL into the app setup. Using an outdated deployment may cause features to malfunction.</div>
     </div>
   </div>
 
@@ -306,7 +294,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
     <p class="prose">The Schedule tab shows your current week pulled live from Google Calendar. Sessions are color-coded and show Apptoto confirmation status when available.</p>
     <div class="callout callout-tip">
       <div class="callout-icon">💡</div>
-      <div class="callout-text">The calendar uses your Apps Script Web App to read calendar events — <strong>only events from the Google account that owns the sheet</strong> are shown. Use the same calendar for all Early Steps sessions.</div>
+      <div class="callout-text">The calendar reads from <strong>the Google account that owns your linked spreadsheet</strong>. Use the same calendar for all Early Steps sessions so all events appear here.</div>
     </div>
   </div>
 
@@ -382,7 +370,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
         <tr><th>Data</th><th>Where stored</th><th>PHI?</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>GAS URL, name, home address</strong></td><td>Your browser (localStorage)</td><td><span class="tag tag-no">No</span></td></tr>
+        <tr><td><strong>Sheet ID, name, discipline, home address, billing rate</strong></td><td>Your browser (localStorage)</td><td><span class="tag tag-no">No</span></td></tr>
         <tr><td><strong>Caseload / Ongoing data</strong></td><td>Your Google Sheet (Ongoing tab)</td><td><span class="tag">Yes</span></td></tr>
         <tr><td><strong>CONT billing log</strong></td><td>Your Google Sheet (CONT tab)</td><td><span class="tag">Yes</span></td></tr>
         <tr><td><strong>Calendar events</strong></td><td>Your Google Calendar</td><td><span class="tag">Yes</span></td></tr>
@@ -394,7 +382,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
     <div class="callout callout-hipaa">
       <div class="callout-icon">🛡️</div>
       <div class="callout-text">
-        <strong>HIPAA Note:</strong> All PHI (child names, dates, billing data) is stored in <strong>your own Google account</strong> — not on Childhood Interventions servers. Google Workspace for Healthcare can be used under a Google BAA if your organization requires it. The Vercel deployment serves only the static application file — no PHI ever passes through it. The ClaimDetailExtract file you upload is processed entirely in your browser and is never transmitted to our servers.
+        <strong>HIPAA Note:</strong> All PHI (child names, dates, billing data) is stored in <strong>your own Google account</strong> — not on Childhood Interventions servers. Google Workspace for Healthcare can be used under a Google BAA if your organization requires it. The app connects directly to your Google Sheet using the URL you provide — no data is stored or proxied through our servers. The ClaimDetailExtract file you upload is processed entirely in your browser and is never transmitted to our servers.
       </div>
     </div>
   </div>
