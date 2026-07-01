@@ -2,11 +2,13 @@
   "version": 2,
   "builds": [
     { "src": "api/*.js", "use": "@vercel/node" },
-    { "src": "index.html", "use": "@vercel/static" }
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "guides/**", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/auth",     "dest": "/api/auth.js" },
     { "src": "/api/add-user", "dest": "/api/add-user.js" },
+    { "src": "/guides/(.*)", "dest": "/guides/$1" },
     { "src": "/(.*)",         "dest": "/index.html" }
   ]
 }
