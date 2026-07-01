@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>COS Scoring Tool — User Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#09253d;--blue:#2d5a8a;--sky:#4a8cc4;--ice:#ddeeff;--white:#ffffff;--slate:#f0f4f8;--mist:#e2eaf3;--ink:#1a2b3c;--mid:#5a7a96;--light:#8bafc8;--green:#2a7d4f;--green-bg:#e8f5ee;--amber:#b45309;--amber-bg:#fef3c7;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:var(--ink);line-height:1.6;}
+.guide-header{background:linear-gradient(135deg,#2d5a8a 0%,#09253d 100%);color:#fff;position:relative;overflow:hidden;}
+.guide-header-inner{max-width:860px;margin:0 auto;padding:56px 32px 48px;position:relative;z-index:2;}
+.guide-header-bg{position:absolute;right:-60px;top:-60px;width:400px;height:400px;background:rgba(255,255,255,0.04);border-radius:50%;z-index:1;}
+.brand-row{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.brand-mark{width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.brand-name{font-size:13px;font-weight:600;opacity:.85;}
+.guide-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sky);margin-bottom:10px;}
+.guide-title{font-size:36px;font-weight:700;line-height:1.15;margin-bottom:14px;}
+.guide-subtitle{font-size:17px;opacity:.75;max-width:540px;line-height:1.5;margin-bottom:28px;}
+.header-badges{display:flex;flex-wrap:wrap;gap:8px;}
+.hbadge{background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600;}
+.guide-body{max-width:860px;margin:0 auto;padding:48px 32px 80px;}
+.toc-card{background:#fff;border-radius:14px;padding:28px 32px;margin-bottom:40px;border:1.5px solid var(--mist);box-shadow:0 2px 12px rgba(9,37,61,0.07);}
+.toc-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--mid);margin-bottom:14px;}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;}
+.toc-list a{font-size:14px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.toc-list a:hover{text-decoration:underline;}
+.toc-num{font-size:11px;font-weight:700;color:var(--light);font-family:'DM Mono',monospace;min-width:20px;}
+.section{margin-bottom:48px;}
+.section-heading{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--ice);display:flex;align-items:center;gap:10px;}
+.section-heading-icon{width:32px;height:32px;border-radius:8px;background:var(--ice);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.prose{font-size:15px;color:var(--ink);line-height:1.7;margin-bottom:16px;}
+.prose strong{color:var(--navy);}
+.prose a{color:var(--blue);}
+.steps{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+.step-card{background:#fff;border-radius:12px;padding:20px 24px;display:flex;gap:18px;align-items:flex-start;border:1.5px solid var(--mist);box-shadow:0 1px 6px rgba(9,37,61,0.05);}
+.step-num{width:32px;height:32px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.step-content .step-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.step-content .step-desc{font-size:14px;color:var(--mid);line-height:1.55;}
+.callout{border-radius:12px;padding:18px 22px;margin:20px 0;display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.6;}
+.callout-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.callout-text{flex:1;}
+.callout-text strong{display:block;margin-bottom:4px;}
+.callout-hipaa{background:#e8f5ee;border:1px solid #b8dfc8;color:#1a4a31;}
+.callout-tip{background:var(--ice);border:1px solid #b3d4f0;color:var(--blue);}
+.callout-warn{background:var(--amber-bg);border:1px solid #fcd34d;color:#92400e;}
+.callout-info{background:var(--slate);border:1px solid var(--mist);color:var(--ink);}
+.illustration{background:#fff;border-radius:14px;border:1.5px solid var(--mist);padding:32px;margin:24px 0;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(9,37,61,0.06);}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:20px 0;}
+.feature-card{background:#fff;border-radius:12px;padding:20px;border:1.5px solid var(--mist);box-shadow:0 1px 6px rgba(9,37,61,0.05);}
+.feature-icon{font-size:24px;margin-bottom:10px;}
+.feature-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:5px;}
+.feature-desc{font-size:13px;color:var(--mid);line-height:1.5;}
+.rating-scale{display:flex;gap:8px;margin:20px 0;flex-wrap:wrap;}
+.rating-box{flex:1;min-width:80px;border-radius:10px;padding:14px 10px;text-align:center;border:1.5px solid var(--mist);}
+.rating-box .rnum{font-size:22px;font-weight:700;}
+.rating-box .rdesc{font-size:11px;color:var(--mid);margin-top:4px;line-height:1.4;}
+.r1{background:#fff0f0;border-color:#fca5a5;}.r1 .rnum{color:#dc2626;}
+.r2{background:#fff7ed;border-color:#fcd34d;}.r2 .rnum{color:#d97706;}
+.r3{background:#fffbeb;border-color:#fde68a;}.r3 .rnum{color:#ca8a04;}
+.r4{background:#f0fdf4;border-color:#86efac;}.r4 .rnum{color:#16a34a;}
+.r5{background:#eff6ff;border-color:#93c5fd;}.r5 .rnum{color:#2563eb;}
+.r6{background:#f5f3ff;border-color:#c4b5fd;}.r6 .rnum{color:#7c3aed;}
+.r7{background:#fdf4ff;border-color:#e879f9;}.r7 .rnum{color:#a21caf;}
+.save-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;}
+.save-table th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;}
+.save-table th:first-child{border-radius:8px 0 0 0;}.save-table th:last-child{border-radius:0 8px 0 0;}
+.save-table td{padding:12px 16px;border-bottom:1px solid var(--mist);vertical-align:top;}
+.save-table tr:last-child td{border-bottom:none;}
+.save-table tr:nth-child(even) td{background:var(--slate);}
+.tag{display:inline-block;background:var(--green-bg);color:var(--green);border-radius:20px;padding:2px 9px;font-size:11px;font-weight:600;}
+.tag-no{background:var(--amber-bg);color:var(--amber);}
+.guide-footer{background:var(--navy);color:rgba(255,255,255,0.6);text-align:center;padding:28px 24px;font-size:13px;line-height:1.6;}
+.guide-footer a{color:rgba(255,255,255,0.75);}
+.guide-footer strong{color:#fff;}
+@media(max-width:600px){.guide-header-inner{padding:40px 20px 36px;}.guide-title{font-size:26px;}.guide-body{padding:28px 16px 60px;}.toc-list{grid-template-columns:1fr;}.rating-scale{gap:4px;}}
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="guide-header-bg"></div>
+  <div class="guide-header-inner">
+    <div class="brand-row">
+      <div class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <span class="brand-name">Childhood Interventions, LLC</span>
+    </div>
+    <div class="guide-eyebrow">User Guide</div>
+    <div class="guide-title">COS Scoring Tool</div>
+    <div class="guide-subtitle">Child Outcome Summary documentation with AI-assisted narrative generation and IFSP-ready PDF export — for Florida Early Steps.</div>
+    <div class="header-badges">
+      <span class="hbadge">🧮 COS Ratings</span>
+      <span class="hbadge">🤖 AI Narratives</span>
+      <span class="hbadge">📄 IFSP-Ready PDF</span>
+      <span class="hbadge">📈 Progress Tracking</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+  <div class="toc-card">
+    <div class="toc-title">In this guide</div>
+    <ul class="toc-list">
+      <li><a href="#overview"><span class="toc-num">01</span> Overview</a></li>
+      <li><a href="#access"><span class="toc-num">02</span> Accessing the Tool</a></li>
+      <li><a href="#rating-scale"><span class="toc-num">03</span> The 7-Point Rating Scale</a></li>
+      <li><a href="#completing"><span class="toc-num">04</span> Completing a COS</a></li>
+      <li><a href="#narratives"><span class="toc-num">05</span> AI-Generated Narratives</a></li>
+      <li><a href="#progress"><span class="toc-num">06</span> Tracking Progress Over Time</a></li>
+      <li><a href="#saving"><span class="toc-num">07</span> Saving &amp; Exporting</a></li>
+      <li><a href="#hipaa"><span class="toc-num">08</span> HIPAA &amp; Privacy</a></li>
+    </ul>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-heading"><div class="section-heading-icon">🧮</div>Overview</div>
+    <p class="prose">The Child Outcome Summary (COS) Scoring Tool streamlines the federal-required COS process for Part C providers. It guides you through rating all three outcome areas, captures the supporting rationale, uses AI to help draft narrative language, and generates a clean PDF ready for the IFSP team.</p>
+
+    <div class="illustration">
+      <svg width="660" height="150" viewBox="0 0 660 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Steps -->
+        <rect x="10" y="30" width="130" height="90" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="75" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22">📋</text>
+        <text x="75" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">Enter Evidence</text>
+        <text x="75" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">strengths + concerns</text>
+        <path d="M145 75 L168 75" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="168,70 178,75 168,80" fill="#8bafc8"/>
+        <rect x="182" y="30" width="130" height="90" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="247" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22">🧮</text>
+        <text x="247" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">Score A, B, C</text>
+        <text x="247" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">7-point scale</text>
+        <path d="M317 75 L340 75" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="340,70 350,75 340,80" fill="#8bafc8"/>
+        <rect x="354" y="30" width="130" height="90" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="419" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22">🤖</text>
+        <text x="419" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">AI Narrative</text>
+        <text x="419" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">draft + review</text>
+        <path d="M489 75 L512 75" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="512,70 522,75 512,80" fill="#8bafc8"/>
+        <rect x="526" y="30" width="130" height="90" rx="12" fill="#e8f5ee" stroke="#2a7d4f" stroke-width="1.5"/>
+        <text x="591" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22">📄</text>
+        <text x="591" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">Export PDF</text>
+        <text x="591" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">IFSP-ready</text>
+      </svg>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧮</div>
+        <div class="feature-title">Guided 7-Point Scoring</div>
+        <div class="feature-desc">Decision trees and anchor descriptions guide you to the correct rating for each outcome area — reduces rating variability across the team.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-title">AI Narrative Drafts</div>
+        <div class="feature-desc">After scoring, AI generates a supporting narrative for each outcome area based on the evidence you entered. Review and edit before finalizing.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <div class="feature-title">Progress Over Time</div>
+        <div class="feature-desc">Track COS ratings across multiple evaluation points to document child progress in the federal reporting format.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <div class="feature-title">IFSP-Ready Export</div>
+        <div class="feature-desc">Export a formatted PDF that includes all three outcome ratings, narrative summaries, and the progress indicator for use in IFSP meetings.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCESS -->
+  <div class="section" id="access">
+    <div class="section-heading"><div class="section-heading-icon">🔑</div>Accessing the Tool</div>
+    <p class="prose">The COS Scoring Tool is accessed through the <strong>Provider Hub</strong> or directly at <strong>cos.childhoodinterventions.com</strong>. Your Hub login email is used for authentication — no separate sign-in needed when coming from the Hub.</p>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">Coming from the Provider Hub: click <em>COS Scoring Tool</em> on your dashboard and you'll be taken in directly with your email pre-validated. Your child roster from EI Session Notes is also accessible in the COS tool.</div>
+    </div>
+  </div>
+
+  <!-- RATING SCALE -->
+  <div class="section" id="rating-scale">
+    <div class="section-heading"><div class="section-heading-icon">🎚️</div>The 7-Point Rating Scale</div>
+    <p class="prose">COS ratings use a 7-point scale defined by federal Early Intervention guidelines. The tool includes anchor descriptions and decision guidance to help teams select the most accurate rating.</p>
+
+    <div class="rating-scale">
+      <div class="rating-box r1"><div class="rnum">1</div><div class="rdesc">Does not yet show skills</div></div>
+      <div class="rating-box r2"><div class="rnum">2</div><div class="rdesc">Between 1 and 3</div></div>
+      <div class="rating-box r3"><div class="rnum">3</div><div class="rdesc">Emerging age-appropriate skills</div></div>
+      <div class="rating-box r4"><div class="rnum">4</div><div class="rdesc">Between 3 and 5</div></div>
+      <div class="rating-box r5"><div class="rnum">5</div><div class="rdesc">Age-appropriate skills</div></div>
+      <div class="rating-box r6"><div class="rnum">6</div><div class="rdesc">Between 5 and 7</div></div>
+      <div class="rating-box r7"><div class="rnum">7</div><div class="rdesc">Age-appropriate + above age</div></div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Rating anchors:</strong> The tool shows the full anchor text and examples for each rating point. Use the <em>Decision Guide</em> to walk through the "would" questions that determine whether a child has age-appropriate skills in each domain.</div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">📊</div>
+      <div class="callout-text"><strong>Progress indicators:</strong> For annual and exit COS, the tool also calculates the progress indicator (a, b, c) by comparing entry and current ratings. This is automatically computed when both ratings are entered.</div>
+    </div>
+  </div>
+
+  <!-- COMPLETING A COS -->
+  <div class="section" id="completing">
+    <div class="section-heading"><div class="section-heading-icon">✅</div>Completing a COS</div>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Select or add the child</div>
+          <div class="step-desc">Choose the child from your roster or add a new child record. Enter the child's initials (or first name only) and date of birth. The COS type (entry, periodic, exit) is selected here.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Enter evidence for Outcome A</div>
+          <div class="step-desc">For the Social-Emotional outcome area, describe the child's current skills in natural environments. Note both strengths and areas of concern. More specific evidence produces better AI narratives.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Select a rating for Outcome A</div>
+          <div class="step-desc">Choose a rating from 1–7. Use the anchor text and decision guide shown on screen. If your team disagrees, the tool lets you note the rating discussion.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Repeat for Outcomes B and C</div>
+          <div class="step-desc">Complete the same process for Knowledge &amp; Skills (B) and Taking Action to Meet Needs (C). The tool steps you through each in sequence.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Generate narratives and export</div>
+          <div class="step-desc">After all three outcomes are scored, click <em>Generate Narratives</em> to get AI-drafted summaries. Review, edit, and then export the complete COS as a PDF.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-text"><strong>Team consensus required:</strong> Florida Early Steps requires COS ratings to reflect team consensus. The tool supports documentation of the discussion, but the rating entered should reflect the full IFSP team's agreed-upon score — not one person's opinion.</div>
+    </div>
+  </div>
+
+  <!-- NARRATIVES -->
+  <div class="section" id="narratives">
+    <div class="section-heading"><div class="section-heading-icon">🤖</div>AI-Generated Narratives</div>
+    <p class="prose">Once ratings are complete, the tool uses the evidence you entered to draft supporting narrative language for each outcome area. These narratives explain the rating and can be included in IFSP documentation.</p>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-text"><strong>Always review AI-generated narratives.</strong> The AI drafts language based on your evidence entries — but you must verify that the narrative accurately reflects the child's skills, your team's discussion, and the rating chosen. Edit anything that doesn't match.</div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">✏️</div>
+        <div class="feature-title">Fully Editable</div>
+        <div class="feature-desc">Click into any narrative to edit. Your changes are preserved as you move between sections.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <div class="feature-title">Regenerate Anytime</div>
+        <div class="feature-desc">Not happy with the draft? Click <em>Regenerate</em> on any outcome area to get an alternative version. Prior versions are not saved — copy before regenerating if you want to keep a draft.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="section" id="progress">
+    <div class="section-heading"><div class="section-heading-icon">📈</div>Tracking Progress Over Time</div>
+    <p class="prose">For children who have a prior COS on file, the tool can display entry ratings alongside current ratings to document progress. The federal progress indicator is calculated automatically.</p>
+
+    <div class="illustration">
+      <svg width="500" height="160" viewBox="0 0 500 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Chart background -->
+        <rect x="50" y="20" width="400" height="120" rx="10" fill="white" stroke="#e2eaf3" stroke-width="1.5"/>
+        <!-- Title -->
+        <text x="250" y="44" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">COS Ratings — Entry vs. Current</text>
+        <!-- Axes -->
+        <line x1="90" y1="55" x2="90" y2="128" stroke="#e2eaf3" stroke-width="1.5"/>
+        <line x1="90" y1="128" x2="430" y2="128" stroke="#e2eaf3" stroke-width="1.5"/>
+        <!-- Entry bars -->
+        <rect x="120" y="103" width="30" height="25" rx="4" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1"/>
+        <rect x="220" y="88" width="30" height="40" rx="4" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1"/>
+        <rect x="320" y="96" width="30" height="32" rx="4" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1"/>
+        <!-- Current bars -->
+        <rect x="155" y="78" width="30" height="50" rx="4" fill="#09253d"/>
+        <rect x="255" y="63" width="30" height="65" rx="4" fill="#09253d"/>
+        <rect x="355" y="78" width="30" height="50" rx="4" fill="#09253d"/>
+        <!-- Labels -->
+        <text x="148" y="142" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a96">Outcome A</text>
+        <text x="248" y="142" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a96">Outcome B</text>
+        <text x="348" y="142" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a96">Outcome C</text>
+        <!-- Legend -->
+        <rect x="370" y="28" width="12" height="8" rx="2" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1"/>
+        <text x="386" y="36" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a96">Entry</text>
+        <rect x="370" y="42" width="12" height="8" rx="2" fill="#09253d"/>
+        <text x="386" y="50" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a96">Current</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SAVING -->
+  <div class="section" id="saving">
+    <div class="section-heading"><div class="section-heading-icon">💾</div>Saving &amp; Exporting</div>
+
+    <table class="save-table">
+      <thead>
+        <tr><th>What</th><th>Where stored</th><th>PHI?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Child records &amp; ratings</strong></td><td>Secure cloud (shared roster with Session Notes)</td><td><span class="tag">Yes</span></td></tr>
+        <tr><td><strong>In-progress COS drafts</strong></td><td>Cloud — auto-saved as you progress</td><td><span class="tag">Yes</span></td></tr>
+        <tr><td><strong>Completed COS PDF</strong></td><td>Your device (download)</td><td><span class="tag">Yes</span></td></tr>
+        <tr><td><strong>AI narratives</strong></td><td>Not stored server-side — only in your session</td><td><span class="tag tag-no">Redacted</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">📥</div>
+      <div class="callout-text"><strong>Export PDF:</strong> Click <em>Export COS PDF</em> on the finalize screen. The PDF includes all three outcome ratings, the progress indicator, narratives, evaluator information, and date. Store in a HIPAA-compliant location and provide a copy to the IFSP team as required by your program.</div>
+    </div>
+  </div>
+
+  <!-- HIPAA -->
+  <div class="section" id="hipaa">
+    <div class="section-heading"><div class="section-heading-icon">🔐</div>HIPAA &amp; Privacy</div>
+
+    <div class="callout callout-hipaa">
+      <div class="callout-icon">🛡️</div>
+      <div class="callout-text">
+        <strong>COS data is Protected Health Information (PHI)</strong><br>
+        COS ratings linked to a specific child constitute PHI under HIPAA. All data is stored in encrypted cloud storage keyed to your login. Access is controlled by your Provider Hub account credentials. Childhood Interventions operates under HIPAA as your Business Associate.
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔑</div>
+        <div class="feature-title">Account-Locked Storage</div>
+        <div class="feature-desc">COS data is stored under your account only — no other provider or organization can access it.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-title">AI &amp; PHI Handling</div>
+        <div class="feature-desc">Evidence descriptions are sent to the AI for narrative generation. Use functional descriptions rather than full child names or identifying details in evidence fields.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">Encrypted Connections</div>
+        <div class="feature-desc">All data between your browser and our servers is transmitted over encrypted HTTPS connections.</div>
+      </div>
+    </div>
+
+    <p class="prose" style="margin-top:20px;"><strong>Best practices:</strong></p>
+    <ul style="font-size:15px;color:var(--ink);line-height:2;padding-left:24px;margin-bottom:16px;">
+      <li>Use the child's initials rather than full name in evidence fields when possible.</li>
+      <li>Lock your device when stepping away during a COS session.</li>
+      <li>Export PDFs only to HIPAA-compliant storage (organizational secure drive, not personal cloud).</li>
+      <li>Notify <a href="mailto:privacy@childhoodinterventions.com">privacy@childhoodinterventions.com</a> of any suspected unauthorized access.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="guide-footer">
+  <strong>Childhood Interventions, LLC</strong> · childhoodinterventions.com<br>
+  Questions? <a href="mailto:support@childhoodinterventions.com">support@childhoodinterventions.com</a> · Privacy: <a href="mailto:privacy@childhoodinterventions.com">privacy@childhoodinterventions.com</a><br>
+  © 2025 Childhood Interventions, LLC. All rights reserved.
+</div>
+</body>
+</html>
