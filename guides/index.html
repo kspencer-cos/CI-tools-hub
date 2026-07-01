@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Provider Tool Guides — Childhood Interventions</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#09253d;--blue:#2d5a8a;--sky:#4a8cc4;--ice:#ddeeff;--white:#fff;--slate:#f0f4f8;--mist:#e2eaf3;--ink:#1a2b3c;--mid:#5a7a96;--light:#8bafc8;--green:#2a7d4f;--green-bg:#e8f5ee;--amber:#b45309;--amber-bg:#fef3c7;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:var(--ink);}
+
+.header{background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 100%);color:#fff;padding:0;position:relative;overflow:hidden;}
+.header-inner{max-width:900px;margin:0 auto;padding:56px 32px 48px;position:relative;z-index:2;}
+.header-bg{position:absolute;right:-80px;top:-80px;width:480px;height:480px;background:rgba(255,255,255,0.04);border-radius:50%;z-index:1;}
+.header-bg2{position:absolute;left:-40px;bottom:-60px;width:280px;height:280px;background:rgba(255,255,255,0.03);border-radius:50%;z-index:1;}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:36px;}
+.brand-mark{width:44px;height:44px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.brand-name{font-size:14px;font-weight:600;opacity:.85;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sky);margin-bottom:10px;}
+.header h1{font-size:38px;font-weight:700;line-height:1.15;margin-bottom:14px;}
+.header p{font-size:17px;opacity:.7;max-width:540px;line-height:1.5;}
+
+.body{max-width:900px;margin:0 auto;padding:48px 32px 80px;}
+
+.hipaa-notice{background:#fff;border:1.5px solid #b8dfc8;border-radius:14px;padding:22px 28px;margin-bottom:40px;display:flex;gap:16px;align-items:flex-start;}
+.hipaa-icon{font-size:28px;flex-shrink:0;}
+.hipaa-text h3{font-size:15px;font-weight:700;color:var(--green);margin-bottom:5px;}
+.hipaa-text p{font-size:14px;color:#2d5a3d;line-height:1.6;}
+
+.section-label{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--light);margin-bottom:16px;margin-top:36px;}
+.section-label:first-of-type{margin-top:0;}
+
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;}
+
+.guide-card{background:#fff;border-radius:14px;border:1.5px solid var(--mist);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:box-shadow 0.2s,transform 0.2s;}
+.guide-card:hover{box-shadow:0 8px 28px rgba(9,37,61,0.13);transform:translateY(-2px);}
+.card-top{height:5px;}
+.card-body{padding:22px 22px 18px;flex:1;display:flex;flex-direction:column;}
+.card-row1{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;}
+.card-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.card-badge{font-size:10px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:3px 9px;border-radius:20px;}
+.badge-daily{background:var(--ice);color:var(--blue);}
+.badge-clinical{background:var(--green-bg);color:var(--green);}
+.badge-resource{background:var(--amber-bg);color:var(--amber);}
+.badge-free{background:#f5f3ff;color:#6b46c1;}
+.card-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.card-desc{font-size:13px;color:var(--mid);line-height:1.55;flex:1;margin-bottom:18px;}
+.card-cta{font-size:13px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:5px;}
+
+.guide-footer{background:var(--navy);color:rgba(255,255,255,0.55);text-align:center;padding:28px 24px;font-size:13px;line-height:1.7;}
+.guide-footer a{color:rgba(255,255,255,0.75);}
+.guide-footer strong{color:#fff;}
+
+@media(max-width:600px){
+  .header-inner{padding:36px 20px 32px;}
+  .header h1{font-size:28px;}
+  .body{padding:28px 16px 60px;}
+  .guide-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-bg"></div>
+  <div class="header-bg2"></div>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <span class="brand-name">Childhood Interventions, LLC</span>
+    </div>
+    <div class="eyebrow">Provider Resource Center</div>
+    <h1>Tool User Guides</h1>
+    <p>Step-by-step guides for every tool in the Childhood Interventions provider suite — including saving, privacy, and HIPAA compliance guidance.</p>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- HIPAA BANNER -->
+  <div class="hipaa-notice">
+    <div class="hipaa-icon">🛡️</div>
+    <div class="hipaa-text">
+      <h3>HIPAA Compliance &amp; Data Privacy</h3>
+      <p>All tools that handle Protected Health Information (PHI) operate under a Business Associate Agreement (BAA) with Childhood Interventions, LLC. Each guide below includes a dedicated HIPAA &amp; Privacy section explaining exactly where data is stored, what leaves your browser, and what responsibilities you carry as the provider. Never store PHI in personal cloud storage (iCloud, personal Google Drive, personal Dropbox) without a BAA in place.</p>
+    </div>
+  </div>
+
+  <!-- DAILY USE -->
+  <div class="section-label">Daily use</div>
+  <div class="guide-grid">
+
+    <a class="guide-card" href="guide-session-notes.html">
+      <div class="card-top" style="background:#2a7d4f;"></div>
+      <div class="card-body">
+        <div class="card-row1">
+          <div class="card-icon" style="background:#e8f5ee;">📝</div>
+          <span class="card-badge badge-daily">Daily use</span>
+        </div>
+        <div class="card-title">EI Session Notes</div>
+        <div class="card-desc">AI-assisted, ESDS-compliant session notes with caregiver signature capture. Includes BAA walkthrough, cloud roster setup, and PDF export guidance.</div>
+        <div class="card-cta">Read guide →</div>
+      </div>
+    </a>
+
+    <a class="guide-card" href="guide-provider-management.html">
+      <div class="card-top" style="background:#b45309;"></div>
+      <div class="card-body">
+        <div class="card-row1">
+          <div class="card-icon" style="background:#fef3c7;">📊</div>
+          <span class="card-badge badge-daily">Daily use</span>
+        </div>
+        <div class="card-title">Provider Management</div>
+        <div class="card-desc">CONT billing, ESDS reconciliation, travel vouchers, and caseload tracking. Includes Google Apps Script setup and data storage explainer.</div>
+        <div class="card-cta">Read guide →</div>
+      </div>
+    </a>
+
+    <a class="guide-card" href="guide-ei-library.html">
+      <div class="card-top" style="background:#6b46c1;"></div>
+      <div class="card-body">
+        <div class="card-row1">
+          <div class="card-icon" style="background:#f5f3ff;">📚</div>
+          <span class="card-badge badge-free">Free</span>
+        </div>
+        <div class="card-title">EI Everywhere Library</div>
+        <div class="card-desc">243 family-facing activity cards for toddlers with developmental differences. No login, no PHI — free to share. Includes tips for embedding into your sessions.</div>
+        <div class="card-cta">Read guide →</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- CLINICAL DOCUMENTATION -->
+  <div class="section-label">Clinical documentation</div>
+  <div class="guide-grid">
+
+    <a class="guide-card" href="guide-cos-tool.html">
+      <div class="card-top" style="background:#2d5a8a;"></div>
+      <div class="card-body">
+        <div class="card-row1">
+          <div class="card-icon" style="background:#ddeeff;">🧮</div>
+          <span class="card-badge badge-clinical">Clinical</span>
+        </div>
+        <div class="card-title">COS Scoring Tool</div>
+        <div class="card-desc">Child Outcome Summary documentation with AI narratives and IFSP-ready PDF. Covers the 7-point rating scale, team consensus requirements, and progress tracking.</div>
+        <div class="card-cta">Read guide →</div>
+      </div>
+    </a>
+
+    <a class="guide-card" href="guide-review-tool.html">
+      <div class="card-top" style="background:#4a8cc4;"></div>
+      <div class="card-body">
+        <div class="card-row1">
+          <div class="card-icon" style="background:#ddeeff;">📋</div>
+          <span class="card-badge badge-clinical">Clinical</span>
+        </div>
+        <div class="card-title">Periodic &amp; Annual Review Tool</div>
+        <div class="card-desc">Upload session notes and generate IFSP outcome summaries. Explains PHI redaction before AI processing, subscription access, and export options.</div>
+        <div class="card-cta">Read guide →</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="section-label">Resources</div>
+  <div class="guide-grid">
+
+    <a class="guide-card" href="guide-flepic.html">
+      <div class="card-top" style="background:#1B5E6E;"></div>
+      <div class="card-body">
+        <div class="card-row1">
+          <div class="card-icon" style="background:#e8f5f5;">📋</div>
+          <span class="card-badge badge-free">Free</span>
+        </div>
+        <div class="card-title">FL-EPIC Session Guide</div>
+        <div class="card-desc">Quick-reference guide to home visiting practice indicators, the 5Q coaching model, FOMPA targets, and Supported Engagement practices. No PHI, no login.</div>
+        <div class="card-cta">Read guide →</div>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+<div class="guide-footer">
+  <strong>Childhood Interventions, LLC</strong> · childhoodinterventions.com<br>
+  Questions or privacy concerns: <a href="mailto:support@childhoodinterventions.com">support@childhoodinterventions.com</a> · <a href="mailto:privacy@childhoodinterventions.com">privacy@childhoodinterventions.com</a><br>
+  © 2025 Childhood Interventions, LLC. All rights reserved. · <a href="https://www.childhoodinterventions.com/privacy-policy" target="_blank">Privacy Policy</a>
+</div>
+
+</body>
+</html>

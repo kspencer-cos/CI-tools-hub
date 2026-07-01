@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Periodic &amp; Annual Review Tool — User Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#09253d;--blue:#2d5a8a;--sky:#4a8cc4;--ice:#ddeeff;--white:#ffffff;--slate:#f0f4f8;--mist:#e2eaf3;--ink:#1a2b3c;--mid:#5a7a96;--light:#8bafc8;--green:#2a7d4f;--green-bg:#e8f5ee;--amber:#b45309;--amber-bg:#fef3c7;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:var(--ink);line-height:1.6;}
+.guide-header{background:linear-gradient(135deg,var(--sky) 0%,var(--navy) 100%);color:#fff;position:relative;overflow:hidden;}
+.guide-header-inner{max-width:860px;margin:0 auto;padding:56px 32px 48px;position:relative;z-index:2;}
+.guide-header-bg{position:absolute;right:-60px;top:-60px;width:400px;height:400px;background:rgba(255,255,255,0.05);border-radius:50%;z-index:1;}
+.brand-row{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.brand-mark{width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.brand-name{font-size:13px;font-weight:600;opacity:.85;}
+.guide-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:10px;}
+.guide-title{font-size:36px;font-weight:700;line-height:1.15;margin-bottom:14px;}
+.guide-subtitle{font-size:17px;opacity:.75;max-width:520px;line-height:1.5;margin-bottom:28px;}
+.header-badges{display:flex;flex-wrap:wrap;gap:8px;}
+.hbadge{background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600;}
+.guide-body{max-width:860px;margin:0 auto;padding:48px 32px 80px;}
+.toc-card{background:#fff;border-radius:14px;padding:28px 32px;margin-bottom:40px;border:1.5px solid var(--mist);box-shadow:0 2px 12px rgba(9,37,61,0.07);}
+.toc-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--mid);margin-bottom:14px;}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;}
+.toc-list a{font-size:14px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.toc-list a:hover{text-decoration:underline;}
+.toc-num{font-size:11px;font-weight:700;color:var(--light);font-family:'DM Mono',monospace;min-width:20px;}
+.section{margin-bottom:48px;}
+.section-heading{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--ice);display:flex;align-items:center;gap:10px;}
+.section-heading-icon{width:32px;height:32px;border-radius:8px;background:var(--ice);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.prose{font-size:15px;color:var(--ink);line-height:1.7;margin-bottom:16px;}
+.prose strong{color:var(--navy);}
+.prose a{color:var(--blue);}
+.steps{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+.step-card{background:#fff;border-radius:12px;padding:20px 24px;display:flex;gap:18px;align-items:flex-start;border:1.5px solid var(--mist);box-shadow:0 1px 6px rgba(9,37,61,0.05);}
+.step-num{width:32px;height:32px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.step-content .step-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.step-content .step-desc{font-size:14px;color:var(--mid);line-height:1.55;}
+.callout{border-radius:12px;padding:18px 22px;margin:20px 0;display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.6;}
+.callout-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.callout-text{flex:1;}
+.callout-text strong{display:block;margin-bottom:4px;}
+.callout-hipaa{background:#e8f5ee;border:1px solid #b8dfc8;color:#1a4a31;}
+.callout-tip{background:var(--ice);border:1px solid #b3d4f0;color:var(--blue);}
+.callout-warn{background:var(--amber-bg);border:1px solid #fcd34d;color:#92400e;}
+.callout-info{background:var(--slate);border:1px solid var(--mist);color:var(--ink);}
+.illustration{background:#fff;border-radius:14px;border:1.5px solid var(--mist);padding:32px;margin:24px 0;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(9,37,61,0.06);}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:20px 0;}
+.feature-card{background:#fff;border-radius:12px;padding:20px;border:1.5px solid var(--mist);box-shadow:0 1px 6px rgba(9,37,61,0.05);}
+.feature-icon{font-size:24px;margin-bottom:10px;}
+.feature-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:5px;}
+.feature-desc{font-size:13px;color:var(--mid);line-height:1.5;}
+.outcome-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0;}
+.outcome-pill{background:#fff;border-radius:10px;padding:16px;border:1.5px solid var(--mist);text-align:center;}
+.outcome-pill .num{font-size:22px;font-weight:700;color:var(--navy);}
+.outcome-pill .label{font-size:12px;color:var(--mid);margin-top:4px;}
+.save-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;}
+.save-table th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;}
+.save-table th:first-child{border-radius:8px 0 0 0;}.save-table th:last-child{border-radius:0 8px 0 0;}
+.save-table td{padding:12px 16px;border-bottom:1px solid var(--mist);vertical-align:top;}
+.save-table tr:last-child td{border-bottom:none;}
+.save-table tr:nth-child(even) td{background:var(--slate);}
+.tag{display:inline-block;background:var(--green-bg);color:var(--green);border-radius:20px;padding:2px 9px;font-size:11px;font-weight:600;}
+.tag-no{background:var(--amber-bg);color:var(--amber);}
+.guide-footer{background:var(--navy);color:rgba(255,255,255,0.6);text-align:center;padding:28px 24px;font-size:13px;line-height:1.6;}
+.guide-footer a{color:rgba(255,255,255,0.75);}
+.guide-footer strong{color:#fff;}
+@media(max-width:600px){.guide-header-inner{padding:40px 20px 36px;}.guide-title{font-size:26px;}.guide-body{padding:28px 16px 60px;}.toc-list{grid-template-columns:1fr;}.outcome-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="guide-header-bg"></div>
+  <div class="guide-header-inner">
+    <div class="brand-row">
+      <div class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <span class="brand-name">Childhood Interventions, LLC</span>
+    </div>
+    <div class="guide-eyebrow">User Guide</div>
+    <div class="guide-title">Periodic &amp; Annual Review Tool</div>
+    <div class="guide-subtitle">Upload session notes and generate IFSP-ready progress summaries by outcome area — powered by AI, with PHI redacted from AI processing.</div>
+    <div class="header-badges">
+      <span class="hbadge">📋 IFSP Reviews</span>
+      <span class="hbadge">🤖 AI-Powered</span>
+      <span class="hbadge">🔒 PHI Redacted</span>
+      <span class="hbadge">🌐 Browser-Based</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+  <div class="toc-card">
+    <div class="toc-title">In this guide</div>
+    <ul class="toc-list">
+      <li><a href="#overview"><span class="toc-num">01</span> Overview</a></li>
+      <li><a href="#access"><span class="toc-num">02</span> Accessing the Tool</a></li>
+      <li><a href="#uploading"><span class="toc-num">03</span> Uploading Session Notes</a></li>
+      <li><a href="#generating"><span class="toc-num">04</span> Generating Summaries</a></li>
+      <li><a href="#outcomes"><span class="toc-num">05</span> Outcome Areas</a></li>
+      <li><a href="#editing"><span class="toc-num">06</span> Editing &amp; Finalizing</a></li>
+      <li><a href="#saving"><span class="toc-num">07</span> Saving &amp; Exporting</a></li>
+      <li><a href="#hipaa"><span class="toc-num">08</span> HIPAA &amp; Privacy</a></li>
+    </ul>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-heading"><div class="section-heading-icon">📋</div>Overview</div>
+    <p class="prose">The Periodic &amp; Annual Review Tool takes the most time-consuming part of an IFSP review — writing progress summaries — and turns it into a guided, AI-assisted process. Upload the session notes from the review period, and the tool generates a narrative summary for each of the three IFSP outcome areas.</p>
+
+    <!-- Illustration: workflow -->
+    <div class="illustration">
+      <svg width="660" height="150" viewBox="0 0 660 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="30" width="130" height="90" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="75" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22">📄</text>
+        <text x="75" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">Upload</text>
+        <text x="75" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">session notes</text>
+        <path d="M145 75 L168 75" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="168,70 178,75 168,80" fill="#8bafc8"/>
+        <rect x="182" y="30" width="130" height="90" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="247" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22">🔒</text>
+        <text x="247" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">PHI Redacted</text>
+        <text x="247" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">before AI sees it</text>
+        <path d="M317 75 L340 75" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="340,70 350,75 340,80" fill="#8bafc8"/>
+        <rect x="354" y="30" width="130" height="90" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="419" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22">🤖</text>
+        <text x="419" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">AI Summarizes</text>
+        <text x="419" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">by outcome area</text>
+        <path d="M489 75 L512 75" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="512,70 522,75 512,80" fill="#8bafc8"/>
+        <rect x="526" y="30" width="130" height="90" rx="12" fill="#e8f5ee" stroke="#2a7d4f" stroke-width="1.5"/>
+        <text x="591" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="22">✅</text>
+        <text x="591" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#09253d">Review-Ready</text>
+        <text x="591" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">summary + PDF</text>
+      </svg>
+    </div>
+
+    <div class="outcome-row">
+      <div class="outcome-pill">
+        <div class="num">A</div>
+        <div class="label">Positive Social-Emotional Skills</div>
+      </div>
+      <div class="outcome-pill">
+        <div class="num">B</div>
+        <div class="label">Acquiring &amp; Using Knowledge &amp; Skills</div>
+      </div>
+      <div class="outcome-pill">
+        <div class="num">C</div>
+        <div class="label">Taking Appropriate Action to Meet Needs</div>
+      </div>
+    </div>
+
+    <p class="prose">The tool organizes generated content around the three federal IFSP outcome areas (A, B, C) so the summaries are ready to paste directly into IFSP review documentation.</p>
+  </div>
+
+  <!-- ACCESS -->
+  <div class="section" id="access">
+    <div class="section-heading"><div class="section-heading-icon">🔑</div>Accessing the Tool</div>
+    <p class="prose">Access is provided through a subscription. The Periodic &amp; Annual Review Tool is available from the <strong>Childhood Interventions Provider Hub</strong> at <strong>tools.childhoodinterventions.com</strong>.</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Sign in to the Provider Hub</div>
+          <div class="step-desc">Go to <strong>tools.childhoodinterventions.com</strong>, enter your email and password. Click <em>Periodic / Annual Review</em> from the dashboard — you'll be taken directly into the tool with your email pre-validated.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Or access directly</div>
+          <div class="step-desc">Go to <strong>summaries.childhoodinterventions.com</strong>. Enter your subscription email on the login screen and click <em>Access Tool →</em>. Your email is validated against your active subscription.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">💳</div>
+      <div class="callout-text"><strong>Subscription required.</strong> Access starts at $19/month or $179/year. Purchase at the link on the login page. Once purchased, your email address is activated within a few minutes. Contact <a href="mailto:support@childhoodinterventions.com">support@childhoodinterventions.com</a> if access isn't working after 15 minutes.</div>
+    </div>
+  </div>
+
+  <!-- UPLOADING -->
+  <div class="section" id="uploading">
+    <div class="section-heading"><div class="section-heading-icon">📤</div>Uploading Session Notes</div>
+    <p class="prose">The tool accepts session notes in PDF or text format. You can upload multiple notes from the review period at once — the AI reads all of them to build the progress summary.</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Gather the session notes for the review period</div>
+          <div class="step-desc">Collect all completed session notes from the current IFSP period. These can be PDFs downloaded from EI Session Notes, scanned paper notes, or text documents. The more complete the notes, the better the summary.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Drag and drop or browse to upload</div>
+          <div class="step-desc">On the main screen, drag your note files onto the upload area or click <em>Browse files</em>. Multiple files can be selected at once. Supported formats: PDF, DOCX, TXT.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Enter review details</div>
+          <div class="step-desc">Enter the child's initials (not full name), date of birth, review period start and end dates, and any specific goals or outcomes to focus on. Use initials and dates — not identifying names.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-text"><strong>Use initials, not full names.</strong> Enter the child's initials (e.g., "J.S.") in the name field — not their full name. The tool redacts obvious identifiers before sending to AI, but minimizing PHI in input fields is best practice and your responsibility.</div>
+    </div>
+  </div>
+
+  <!-- GENERATING -->
+  <div class="section" id="generating">
+    <div class="section-heading"><div class="section-heading-icon">🤖</div>Generating Summaries</div>
+    <p class="prose">Once notes are uploaded, the AI reads through all of them and generates a progress narrative for each IFSP outcome area.</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Click "Generate Summary"</div>
+          <div class="step-desc">After uploading notes and entering review details, click <em>Generate Summary</em>. Processing typically takes 20–60 seconds depending on the number and length of notes.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Wait for the progress indicator</div>
+          <div class="step-desc">A progress bar shows while the notes are processed. Do not close the tab — if you navigate away, you'll need to restart. The tool processes notes locally in your browser before sending anonymized content to the AI.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Review the generated summaries</div>
+          <div class="step-desc">Three summary sections appear — one per IFSP outcome area. Each is an editable text block. Read each carefully before use.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="section" id="outcomes">
+    <div class="section-heading"><div class="section-heading-icon">🎯</div>Outcome Areas</div>
+    <p class="prose">The tool generates a progress narrative for each of Florida's three IFSP outcome areas, aligned with ESDS documentation requirements.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💛</div>
+        <div class="feature-title">Outcome A — Social-Emotional</div>
+        <div class="feature-desc">Summarizes progress in positive social relationships, emotional regulation, and social communication with peers and adults.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📘</div>
+        <div class="feature-title">Outcome B — Knowledge &amp; Skills</div>
+        <div class="feature-desc">Documents acquisition of concepts, vocabulary, early literacy/numeracy, problem solving, and imitation from the review period notes.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💚</div>
+        <div class="feature-title">Outcome C — Meeting Needs</div>
+        <div class="feature-desc">Covers the child's ability to take care of basic needs: feeding, dressing, mobility, safety, and communicating wants and needs.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>COS rating connection:</strong> Progress summaries generated here can also be used as source material when completing a Child Outcome Summary (COS) rating in the COS Scoring Tool. Both tools are designed to work together in your IFSP review workflow.</div>
+    </div>
+  </div>
+
+  <!-- EDITING -->
+  <div class="section" id="editing">
+    <div class="section-heading"><div class="section-heading-icon">✏️</div>Editing &amp; Finalizing</div>
+    <p class="prose">AI-generated summaries are a starting point — always review and personalize before using in official documentation.</p>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-text"><strong>Review all generated text before use.</strong> AI can miss context, misinterpret clinical language, or generalize incorrectly. You are the clinician of record — the final summary is your professional statement and must reflect your accurate clinical judgment.</div>
+    </div>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">✏️</div>
+        <div class="step-content">
+          <div class="step-title">Click into any summary block to edit</div>
+          <div class="step-desc">Each outcome area is an editable text field. Click directly into the text to make changes. Your edits are not auto-saved — copy your final text or use the export function before closing.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">🔄</div>
+        <div class="step-content">
+          <div class="step-title">Regenerate if needed</div>
+          <div class="step-desc">If a section doesn't capture the right themes, you can regenerate individual sections or all three. Each regeneration may produce slightly different language.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVING -->
+  <div class="section" id="saving">
+    <div class="section-heading"><div class="section-heading-icon">💾</div>Saving &amp; Exporting</div>
+    <p class="prose">The tool does not auto-save summaries to a cloud account — export your completed summaries before closing the browser.</p>
+
+    <table class="save-table">
+      <thead>
+        <tr><th>What</th><th>How to save</th><th>Where it goes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Summary text</strong></td>
+          <td>Copy to clipboard or Export PDF</td>
+          <td>Your device or clipboard</td>
+        </tr>
+        <tr>
+          <td><strong>Uploaded note files</strong></td>
+          <td>Not stored — processed in memory only</td>
+          <td>Never leave your browser session</td>
+        </tr>
+        <tr>
+          <td><strong>Your subscription</strong></td>
+          <td>Managed via email validation</td>
+          <td>Childhood Interventions servers (email only)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">📥</div>
+      <div class="callout-text"><strong>Export to PDF:</strong> Click <em>Export PDF</em> to download a formatted summary document. Store the PDF in a HIPAA-compliant location — do not save to personal cloud storage (iCloud, personal Google Drive, personal Dropbox) without a BAA in place.</div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">📋</div>
+      <div class="callout-text"><strong>Copy to IFSP documentation:</strong> You can also copy the text from each outcome area directly into your IFSP review form in ESDS or another system. The text is yours to use in any format your program requires.</div>
+    </div>
+  </div>
+
+  <!-- HIPAA -->
+  <div class="section" id="hipaa">
+    <div class="section-heading"><div class="section-heading-icon">🔐</div>HIPAA &amp; Privacy</div>
+
+    <div class="callout callout-hipaa">
+      <div class="callout-icon">🛡️</div>
+      <div class="callout-text">
+        <strong>PHI is redacted before AI processing</strong><br>
+        The tool identifies and removes obvious Protected Health Information (names, dates of birth, addresses) from note content before it is sent to the AI. The AI receives anonymized clinical content — not identifying details. This is a key privacy safeguard in the review workflow.
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📥</div>
+        <div class="feature-title">Notes stay in your browser</div>
+        <div class="feature-desc">Uploaded session note files are read in your browser and never uploaded to our servers. The files go from your device to the AI — not through our storage.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <div class="feature-title">Subscription auth only</div>
+        <div class="feature-desc">The only data stored server-side is your email address and subscription status. No notes, summaries, or child data are ever stored on our servers.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">HTTPS throughout</div>
+        <div class="feature-desc">All connections are encrypted via HTTPS. Do not use the tool on public Wi-Fi without a VPN, as your screen content could be visible to others nearby.</div>
+      </div>
+    </div>
+
+    <p class="prose" style="margin-top:20px;"><strong>Your responsibilities:</strong></p>
+    <ul style="font-size:15px;color:var(--ink);line-height:2;padding-left:24px;margin-bottom:16px;">
+      <li>Use initials only (not full child names) when entering review details.</li>
+      <li>Only use the tool on a device with a screen lock and password protection.</li>
+      <li>Export PDFs to HIPAA-compliant storage locations only.</li>
+      <li>Do not share your subscription email/login with others outside your organization.</li>
+      <li>Log out or close the browser tab when finished, especially on shared devices.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="guide-footer">
+  <strong>Childhood Interventions, LLC</strong> · childhoodinterventions.com<br>
+  Questions? <a href="mailto:support@childhoodinterventions.com">support@childhoodinterventions.com</a> · Privacy: <a href="mailto:privacy@childhoodinterventions.com">privacy@childhoodinterventions.com</a><br>
+  © 2025 Childhood Interventions, LLC. All rights reserved.
+</div>
+</body>
+</html>

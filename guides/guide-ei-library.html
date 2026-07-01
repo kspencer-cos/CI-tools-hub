@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EI Everywhere Library — User Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#09253d;--blue:#2d5a8a;--sky:#4a8cc4;--ice:#ddeeff;--white:#fff;--slate:#f0f4f8;--mist:#e2eaf3;--ink:#1a2b3c;--mid:#5a7a96;--light:#8bafc8;--green:#2a7d4f;--green-bg:#e8f5ee;--amber:#b45309;--amber-bg:#fef3c7;--purple:#6b46c1;--purple-bg:#f5f3ff;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:var(--ink);line-height:1.6;}
+.guide-header{background:linear-gradient(135deg,#6b46c1 0%,#09253d 100%);color:#fff;position:relative;overflow:hidden;}
+.guide-header-inner{max-width:860px;margin:0 auto;padding:56px 32px 48px;position:relative;z-index:2;}
+.guide-header-bg{position:absolute;right:-60px;top:-60px;width:400px;height:400px;background:rgba(255,255,255,0.04);border-radius:50%;z-index:1;}
+.brand-row{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.brand-mark{width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:9px;display:flex;align-items:center;justify-content:center;}
+.brand-name{font-size:13px;font-weight:600;opacity:.85;}
+.guide-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#c4b5fd;margin-bottom:10px;}
+.guide-title{font-size:36px;font-weight:700;line-height:1.15;margin-bottom:14px;}
+.guide-subtitle{font-size:17px;opacity:.75;max-width:520px;line-height:1.5;margin-bottom:28px;}
+.header-badges{display:flex;flex-wrap:wrap;gap:8px;}
+.hbadge{background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600;}
+.guide-body{max-width:860px;margin:0 auto;padding:48px 32px 80px;}
+.toc-card{background:#fff;border-radius:14px;padding:28px 32px;margin-bottom:40px;border:1.5px solid var(--mist);box-shadow:0 2px 12px rgba(9,37,61,0.07);}
+.toc-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--mid);margin-bottom:14px;}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;}
+.toc-list a{font-size:14px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.toc-list a:hover{text-decoration:underline;}
+.toc-num{font-size:11px;font-weight:700;color:var(--light);font-family:'DM Mono',monospace;min-width:20px;}
+.section{margin-bottom:48px;}
+.section-heading{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--purple-bg);display:flex;align-items:center;gap:10px;}
+.section-heading-icon{width:32px;height:32px;border-radius:8px;background:var(--purple-bg);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.prose{font-size:15px;color:var(--ink);line-height:1.7;margin-bottom:16px;}
+.prose strong{color:var(--navy);}
+.prose a{color:var(--blue);}
+.callout{border-radius:12px;padding:18px 22px;margin:20px 0;display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.6;}
+.callout-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.callout-text{flex:1;}
+.callout-text strong{display:block;margin-bottom:4px;}
+.callout-hipaa{background:#e8f5ee;border:1px solid #b8dfc8;color:#1a4a31;}
+.callout-tip{background:var(--ice);border:1px solid #b3d4f0;color:var(--blue);}
+.callout-warn{background:var(--amber-bg);border:1px solid #fcd34d;color:#92400e;}
+.callout-info{background:var(--slate);border:1px solid var(--mist);color:var(--ink);}
+.callout-purple{background:#f5f3ff;border:1px solid #c4b5fd;color:#4c1d95;}
+.illustration{background:#fff;border-radius:14px;border:1.5px solid var(--mist);padding:32px;margin:24px 0;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(9,37,61,0.06);}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:20px 0;}
+.feature-card{background:#fff;border-radius:12px;padding:20px;border:1.5px solid var(--mist);box-shadow:0 1px 6px rgba(9,37,61,0.05);}
+.feature-icon{font-size:24px;margin-bottom:10px;}
+.feature-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:5px;}
+.feature-desc{font-size:13px;color:var(--mid);line-height:1.5;}
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0;}
+.sample-card{background:#fff;border-radius:12px;padding:16px;border:1.5px solid var(--mist);text-align:center;}
+.sample-card .card-emoji{font-size:28px;margin-bottom:8px;}
+.sample-card .card-title{font-size:12px;font-weight:600;color:var(--navy);}
+.sample-card .card-domain{font-size:10px;color:var(--mid);margin-top:3px;background:var(--purple-bg);color:var(--purple);border-radius:20px;padding:2px 8px;display:inline-block;}
+.steps{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+.step-card{background:#fff;border-radius:12px;padding:20px 24px;display:flex;gap:18px;align-items:flex-start;border:1.5px solid var(--mist);box-shadow:0 1px 6px rgba(9,37,61,0.05);}
+.step-num{width:32px;height:32px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.step-content .step-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.step-content .step-desc{font-size:14px;color:var(--mid);line-height:1.55;}
+.guide-footer{background:var(--navy);color:rgba(255,255,255,0.6);text-align:center;padding:28px 24px;font-size:13px;line-height:1.6;}
+.guide-footer a{color:rgba(255,255,255,0.75);}
+.guide-footer strong{color:#fff;}
+@media(max-width:600px){.guide-header-inner{padding:40px 20px 36px;}.guide-title{font-size:26px;}.guide-body{padding:28px 16px 60px;}.toc-list{grid-template-columns:1fr;}.card-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="guide-header-bg"></div>
+  <div class="guide-header-inner">
+    <div class="brand-row">
+      <div class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <span class="brand-name">Childhood Interventions, LLC</span>
+    </div>
+    <div class="guide-eyebrow">User Guide</div>
+    <div class="guide-title">EI Everywhere Library</div>
+    <div class="guide-subtitle">243 family-facing activity cards for toddlers with developmental differences — no login required, free to share.</div>
+    <div class="header-badges">
+      <span class="hbadge">📚 243 Cards</span>
+      <span class="hbadge">🆓 Free Access</span>
+      <span class="hbadge">👨‍👩‍👧 Family-Facing</span>
+      <span class="hbadge">🌐 No Login</span>
+    </div>
+  </div>
+</div>
+
+<div class="guide-body">
+  <div class="toc-card">
+    <div class="toc-title">In this guide</div>
+    <ul class="toc-list">
+      <li><a href="#overview"><span class="toc-num">01</span> Overview</a></li>
+      <li><a href="#browsing"><span class="toc-num">02</span> Browsing the Library</a></li>
+      <li><a href="#filtering"><span class="toc-num">03</span> Filtering &amp; Searching</a></li>
+      <li><a href="#sharing"><span class="toc-num">04</span> Sharing with Families</a></li>
+      <li><a href="#printing"><span class="toc-num">05</span> Printing Cards</a></li>
+      <li><a href="#hipaa"><span class="toc-num">06</span> Privacy &amp; HIPAA</a></li>
+      <li><a href="#tips"><span class="toc-num">07</span> Tips for Providers</a></li>
+    </ul>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-heading"><div class="section-heading-icon">📚</div>Overview</div>
+    <p class="prose">The EI Everywhere Library is a free, publicly accessible collection of <strong>243 family-facing activity cards</strong> designed for toddlers with developmental differences. Each card describes a practical activity a caregiver can do at home — in everyday routines — to support their child's development.</p>
+    <p class="prose">As an Early Steps provider, you can share these cards directly with families during sessions, send the link as a home program resource, or browse them yourself to find carryover activity ideas for your coaching conversations.</p>
+
+    <!-- Sample card illustration -->
+    <div class="illustration">
+      <svg width="620" height="180" viewBox="0 0 620 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Card 1 -->
+        <rect x="20" y="20" width="175" height="140" rx="12" fill="white" stroke="#e2eaf3" stroke-width="1.5"/>
+        <rect x="20" y="20" width="175" height="5" rx="12" fill="#6b46c1"/>
+        <text x="107" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="32">🧩</text>
+        <text x="107" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#09253d">Puzzle Time</text>
+        <rect x="60" y="110" width="94" height="18" rx="9" fill="#f5f3ff"/>
+        <text x="107" y="123" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="600" fill="#6b46c1">Cognitive</text>
+        <text x="107" y="145" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a96">Fine motor · Problem solving</text>
+        <!-- Card 2 -->
+        <rect x="222" y="20" width="175" height="140" rx="12" fill="white" stroke="#e2eaf3" stroke-width="1.5"/>
+        <rect x="222" y="20" width="175" height="5" rx="12" fill="#2a7d4f"/>
+        <text x="309" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="32">🫧</text>
+        <text x="309" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#09253d">Bubble Chase</text>
+        <rect x="255" y="110" width="108" height="18" rx="9" fill="#e8f5ee"/>
+        <text x="309" y="123" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="600" fill="#2a7d4f">Social-Emotional</text>
+        <text x="309" y="145" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a96">Joint attention · Motor</text>
+        <!-- Card 3 -->
+        <rect x="424" y="20" width="175" height="140" rx="12" fill="white" stroke="#e2eaf3" stroke-width="1.5"/>
+        <rect x="424" y="20" width="175" height="5" rx="12" fill="#b45309"/>
+        <text x="511" y="70" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="32">🥣</text>
+        <text x="511" y="100" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#09253d">Snack Choices</text>
+        <rect x="459" y="110" width="104" height="18" rx="9" fill="#fef3c7"/>
+        <text x="511" y="123" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="600" fill="#b45309">Self-Care</text>
+        <text x="511" y="145" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a96">Communication · Choice-making</text>
+      </svg>
+    </div>
+
+    <div class="callout callout-purple">
+      <div class="callout-icon">🆓</div>
+      <div class="callout-text"><strong>No login required.</strong> The EI Everywhere Library is completely free and open — anyone with the link can browse and use the cards. There is no PHI involved. Share the link freely with families, colleagues, or community partners.</div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🃏</div>
+        <div class="feature-title">243 Activity Cards</div>
+        <div class="feature-desc">A large, curated collection covering all developmental domains — not a generic list, but activities designed specifically for toddlers with developmental differences.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏠</div>
+        <div class="feature-title">Routine-Based</div>
+        <div class="feature-desc">Every card is embedded in a natural daily routine — mealtimes, bath, play, bedtime — so families can practice without extra prep time.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <div class="feature-title">Plain Language</div>
+        <div class="feature-desc">Written for caregivers, not clinicians. No jargon — families can read and use each card independently, without needing a provider present.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">Mobile-Friendly</div>
+        <div class="feature-desc">Works on any device — phone, tablet, laptop. Families can bookmark it on their phone for easy access throughout the day.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BROWSING -->
+  <div class="section" id="browsing">
+    <div class="section-heading"><div class="section-heading-icon">🔎</div>Browsing the Library</div>
+    <p class="prose">The library opens to a grid of all 243 cards. Cards show the activity title, a domain tag (e.g., Language, Motor, Social-Emotional), and a brief description of what the activity targets.</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Open the library</div>
+          <div class="step-desc">Go to <strong>ei-everywhere-library.vercel.app</strong> or click <em>EI Everywhere Library</em> from the Provider Hub dashboard. No sign-in required.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Scroll the card grid</div>
+          <div class="step-desc">All 243 cards are displayed in a scrollable grid. Each card shows the activity emoji, title, developmental domain, and sub-skill tags at a glance.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Click a card to open it</div>
+          <div class="step-desc">Clicking a card opens the full activity — including step-by-step instructions written for caregivers, materials needed (usually none), and tips for modification if the child is not yet ready for the full activity.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTERING -->
+  <div class="section" id="filtering">
+    <div class="section-heading"><div class="section-heading-icon">🔧</div>Filtering &amp; Searching</div>
+    <p class="prose">With 243 cards, filtering helps you find the right activity for a specific child or goal quickly.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🏷️</div>
+        <div class="feature-title">Filter by Domain</div>
+        <div class="feature-desc">Use the domain filter buttons at the top to show only cards in a specific area: Language, Social-Emotional, Motor, Cognitive, or Self-Care.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-title">Search by Keyword</div>
+        <div class="feature-desc">Type a keyword (e.g., "mealtime," "imitation," "bath") in the search box to find cards matching that term in the title or description.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎂</div>
+        <div class="feature-title">Filter by Age Range</div>
+        <div class="feature-desc">Select an age range to show only developmentally appropriate cards for a child of that age — useful when selecting home program activities.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏠</div>
+        <div class="feature-title">Filter by Routine</div>
+        <div class="feature-desc">Browse by daily routine (mealtime, playtime, bath, bedtime, getting dressed) to find activities that fit naturally into a family's existing schedule.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARING -->
+  <div class="section" id="sharing">
+    <div class="section-heading"><div class="section-heading-icon">📤</div>Sharing with Families</div>
+    <p class="prose">The library is designed to be shared directly with families. Because there's no login required and no PHI involved, it's safe to share the link with any family.</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">🔗</div>
+        <div class="step-content">
+          <div class="step-title">Share the library link</div>
+          <div class="step-desc">Share <strong>ei-everywhere-library.vercel.app</strong> with families via text, email, or your messaging platform. Families can bookmark it on their phone for ongoing access.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">📋</div>
+        <div class="step-content">
+          <div class="step-title">Share a specific card link</div>
+          <div class="step-desc">When viewing an individual card, the URL in the address bar is a direct link to that card. Copy and share it to send a family to a specific activity you've selected for them.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">🖨️</div>
+        <div class="step-content">
+          <div class="step-title">Print for families without devices</div>
+          <div class="step-desc">Each card has a print-friendly format. Open the card, click <em>Print</em>, and give the printed card to families who prefer paper materials.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Use during coaching sessions:</strong> Browse the library with a caregiver during a visit to find activities they feel comfortable trying. Let the caregiver choose from a few options — it increases buy-in and home practice completion.</div>
+    </div>
+  </div>
+
+  <!-- PRINTING -->
+  <div class="section" id="printing">
+    <div class="section-heading"><div class="section-heading-icon">🖨️</div>Printing Cards</div>
+    <p class="prose">Any card in the library can be printed for families who prefer physical handouts.</p>
+    <div class="callout callout-tip">
+      <div class="callout-icon">🖨️</div>
+      <div class="callout-text"><strong>How to print:</strong> Open the card you want to print. Use your browser's print function (Ctrl+P / Cmd+P) or click the Print button on the card. Select "Save as PDF" if you want to email the card instead of printing it. Cards are formatted for a single page.</div>
+    </div>
+    <div class="callout callout-info">
+      <div class="callout-icon">ℹ️</div>
+      <div class="callout-text">Printed and downloaded cards are free to share with families. They may not be modified, repackaged, or sold. © Childhood Interventions, LLC. All rights reserved.</div>
+    </div>
+  </div>
+
+  <!-- HIPAA -->
+  <div class="section" id="hipaa">
+    <div class="section-heading"><div class="section-heading-icon">🔐</div>Privacy &amp; HIPAA</div>
+
+    <div class="callout callout-hipaa">
+      <div class="callout-icon">🛡️</div>
+      <div class="callout-text">
+        <strong>No PHI is collected or stored by this tool.</strong><br>
+        The EI Everywhere Library does not require a login, does not collect any user data, and does not store any information about which families or children access it. There is no PHI involved — you can share this tool with families without any HIPAA considerations.
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🍪</div>
+        <div class="feature-title">No Tracking Cookies</div>
+        <div class="feature-desc">The library does not use advertising cookies, tracking pixels, or analytics that identifies individual users.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">HTTPS Served</div>
+        <div class="feature-desc">The library is served over HTTPS — the connection between families and the site is encrypted.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👁️</div>
+        <div class="feature-title">No User Accounts</div>
+        <div class="feature-desc">No accounts, no emails, no passwords. Families visit and browse — no data is created or stored about them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="section" id="tips">
+    <div class="section-heading"><div class="section-heading-icon">💡</div>Tips for Providers</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Connect cards to IFSP goals</div>
+        <div class="feature-desc">When selecting cards for a family, choose activities that map to the child's active IFSP outcome areas so home practice directly supports documented goals.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <div class="feature-title">Assign 2–3 cards per visit</div>
+        <div class="feature-desc">Research shows families are more likely to follow through with a small number of specific activities. Choose 2–3 cards per visit rather than a long list.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <div class="feature-title">Ask families to send updates</div>
+        <div class="feature-desc">Encourage families to text a photo or short video of trying an activity. It drives carryover and gives you clinical data for your next session note.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <div class="feature-title">Use alongside FL-EPIC</div>
+        <div class="feature-desc">The EI Everywhere Library pairs well with the FL-EPIC Session Guide — use FL-EPIC to structure your coaching framework and library cards as the specific activities within that framework.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="guide-footer">
+  <strong>Childhood Interventions, LLC</strong> · childhoodinterventions.com<br>
+  Questions? <a href="mailto:support@childhoodinterventions.com">support@childhoodinterventions.com</a><br>
+  © 2025 Childhood Interventions, LLC. All rights reserved.
+</div>
+</body>
+</html>

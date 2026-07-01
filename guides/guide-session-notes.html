@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EI Session Notes — User Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:   #09253d;
+  --blue:   #2d5a8a;
+  --sky:    #4a8cc4;
+  --ice:    #ddeeff;
+  --white:  #ffffff;
+  --slate:  #f0f4f8;
+  --mist:   #e2eaf3;
+  --ink:    #1a2b3c;
+  --mid:    #5a7a96;
+  --light:  #8bafc8;
+  --green:  #2a7d4f;
+  --green-bg: #e8f5ee;
+  --amber:  #b45309;
+  --amber-bg: #fef3c7;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); color: var(--ink); line-height: 1.6; }
+
+/* ── HEADER ── */
+.guide-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  color: var(--white);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.guide-header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 32px 48px;
+  position: relative;
+  z-index: 2;
+}
+.guide-header-bg {
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 400px;
+  height: 400px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  z-index: 1;
+}
+.guide-header-bg2 {
+  position: absolute;
+  right: 80px;
+  bottom: -100px;
+  width: 260px;
+  height: 260px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 50%;
+  z-index: 1;
+}
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-name { font-size: 13px; font-weight: 600; opacity: 0.85; }
+.guide-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 10px;
+}
+.guide-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.guide-subtitle {
+  font-size: 17px;
+  opacity: 0.75;
+  max-width: 520px;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.header-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hbadge {
+  background: rgba(255,255,255,0.13);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ── LAYOUT ── */
+.guide-body { max-width: 860px; margin: 0 auto; padding: 48px 32px 80px; }
+
+/* ── TOC ── */
+.toc-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  border: 1.5px solid var(--mist);
+  box-shadow: 0 2px 12px rgba(9,37,61,0.07);
+}
+.toc-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--mid); margin-bottom: 14px; }
+.toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+.toc-list a { font-size: 14px; color: var(--blue); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+.toc-list a:hover { text-decoration: underline; }
+.toc-num { font-size: 11px; font-weight: 700; color: var(--light); font-family: 'DM Mono', monospace; min-width: 20px; }
+
+/* ── SECTIONS ── */
+.section { margin-bottom: 48px; }
+.section-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ice);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-heading-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--ice);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.prose { font-size: 15px; color: var(--ink); line-height: 1.7; margin-bottom: 16px; }
+.prose strong { color: var(--navy); }
+.prose a { color: var(--blue); }
+
+/* ── STEP CARDS ── */
+.steps { display: flex; flex-direction: column; gap: 14px; margin: 20px 0; }
+.step-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  border: 1.5px solid var(--mist);
+  box-shadow: 0 1px 6px rgba(9,37,61,0.05);
+}
+.step-num {
+  width: 32px;
+  height: 32px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.step-content .step-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.step-content .step-desc { font-size: 14px; color: var(--mid); line-height: 1.55; }
+
+/* ── CALLOUT BOXES ── */
+.callout {
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.callout-text strong { display: block; margin-bottom: 4px; font-size: 14px; }
+.callout-text { flex: 1; }
+.callout-hipaa { background: #e8f5ee; border: 1px solid #b8dfc8; color: #1a4a31; }
+.callout-tip   { background: var(--ice); border: 1px solid #b3d4f0; color: var(--blue); }
+.callout-warn  { background: var(--amber-bg); border: 1px solid #fcd34d; color: #92400e; }
+.callout-info  { background: var(--slate); border: 1px solid var(--mist); color: var(--ink); }
+
+/* ── ILLUSTRATION ── */
+.illustration {
+  background: var(--white);
+  border-radius: 14px;
+  border: 1.5px solid var(--mist);
+  padding: 32px;
+  margin: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(9,37,61,0.06);
+}
+
+/* ── FEATURE GRID ── */
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; margin: 20px 0; }
+.feature-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1.5px solid var(--mist);
+  box-shadow: 0 1px 6px rgba(9,37,61,0.05);
+}
+.feature-icon { font-size: 24px; margin-bottom: 10px; }
+.feature-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+.feature-desc { font-size: 13px; color: var(--mid); line-height: 1.5; }
+
+/* ── SAVING TABLE ── */
+.save-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+.save-table th { background: var(--navy); color: var(--white); padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.save-table th:first-child { border-radius: 8px 0 0 0; }
+.save-table th:last-child { border-radius: 0 8px 0 0; }
+.save-table td { padding: 12px 16px; border-bottom: 1px solid var(--mist); vertical-align: top; color: var(--ink); }
+.save-table tr:last-child td { border-bottom: none; }
+.save-table tr:nth-child(even) td { background: var(--slate); }
+.save-table .tag { display: inline-block; background: var(--green-bg); color: var(--green); border-radius: 20px; padding: 2px 9px; font-size: 11px; font-weight: 600; }
+.save-table .tag-no { background: var(--amber-bg); color: var(--amber); }
+
+/* ── FOOTER ── */
+.guide-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 28px 24px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.guide-footer a { color: rgba(255,255,255,0.75); }
+.guide-footer strong { color: var(--white); }
+
+@media (max-width: 600px) {
+  .guide-header-inner { padding: 40px 20px 36px; }
+  .guide-title { font-size: 26px; }
+  .guide-body { padding: 28px 16px 60px; }
+  .toc-list { grid-template-columns: 1fr; }
+  .step-card { flex-direction: column; gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="guide-header">
+  <div class="guide-header-bg"></div>
+  <div class="guide-header-bg2"></div>
+  <div class="guide-header-inner">
+    <div class="brand-row">
+      <div class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <span class="brand-name">Childhood Interventions, LLC</span>
+    </div>
+    <div class="guide-eyebrow">User Guide</div>
+    <div class="guide-title">EI Session Notes</div>
+    <div class="guide-subtitle">AI-assisted, ESDS-compliant session notes with caregiver signature capture — built for Early Steps providers.</div>
+    <div class="header-badges">
+      <span class="hbadge">📝 Session Notes</span>
+      <span class="hbadge">✅ HIPAA Compliant</span>
+      <span class="hbadge">🔐 BAA Included</span>
+      <span class="hbadge">🤖 AI-Assisted</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="guide-body">
+
+  <!-- TOC -->
+  <div class="toc-card">
+    <div class="toc-title">In this guide</div>
+    <ul class="toc-list">
+      <li><a href="#overview"><span class="toc-num">01</span> Overview</a></li>
+      <li><a href="#getting-started"><span class="toc-num">02</span> Getting Started</a></li>
+      <li><a href="#writing-notes"><span class="toc-num">03</span> Writing a Session Note</a></li>
+      <li><a href="#signatures"><span class="toc-num">04</span> Caregiver Signatures</a></li>
+      <li><a href="#saving"><span class="toc-num">05</span> Saving &amp; Exporting</a></li>
+      <li><a href="#hipaa"><span class="toc-num">06</span> HIPAA &amp; Privacy</a></li>
+      <li><a href="#roster"><span class="toc-num">07</span> Managing Your Roster</a></li>
+      <li><a href="#tips"><span class="toc-num">08</span> Tips &amp; Best Practices</a></li>
+    </ul>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-heading">
+      <div class="section-heading-icon">📋</div>
+      Overview
+    </div>
+    <p class="prose">EI Session Notes is a browser-based tool that helps Early Steps providers write, complete, and store ESDS-compliant session notes faster — without sacrificing quality or compliance. The tool uses AI to draft note language based on your session inputs, then lets you review, edit, and finalize before generating a PDF.</p>
+
+    <!-- Illustration: app flow diagram -->
+    <div class="illustration">
+      <svg width="720" height="160" viewBox="0 0 720 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Step 1 -->
+        <rect x="10" y="30" width="130" height="100" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="75" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="24">📋</text>
+        <text x="75" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#09253d">Select Child</text>
+        <text x="75" y="110" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">from your roster</text>
+        <!-- Arrow -->
+        <path d="M145 80 L168 80" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="168,75 178,80 168,85" fill="#8bafc8"/>
+        <!-- Step 2 -->
+        <rect x="182" y="30" width="130" height="100" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="247" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="24">📝</text>
+        <text x="247" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#09253d">Log Session</text>
+        <text x="247" y="110" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">EPIC + EI details</text>
+        <!-- Arrow -->
+        <path d="M317 80 L340 80" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="340,75 350,80 340,85" fill="#8bafc8"/>
+        <!-- Step 3 -->
+        <rect x="354" y="30" width="130" height="100" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
+        <text x="419" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="24">🤖</text>
+        <text x="419" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#09253d">AI Generates</text>
+        <text x="419" y="110" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">review &amp; edit draft</text>
+        <!-- Arrow -->
+        <path d="M489 80 L512 80" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
+        <polygon points="512,75 522,80 512,85" fill="#8bafc8"/>
+        <!-- Step 4 -->
+        <rect x="526" y="30" width="184" height="100" rx="12" fill="#e8f5ee" stroke="#2a7d4f" stroke-width="1.5"/>
+        <text x="618" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="24">✅</text>
+        <text x="618" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#09253d">Sign &amp; Save PDF</text>
+        <text x="618" y="110" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">caregiver signature + cloud</text>
+      </svg>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-title">AI-Assisted Drafting</div>
+        <div class="feature-desc">Enter session details and the AI generates ESDS-compliant note language for you to review and edit.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✍️</div>
+        <div class="feature-title">Caregiver Signatures</div>
+        <div class="feature-desc">Capture a digital caregiver signature directly in the browser — no paper or separate app needed.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">☁️</div>
+        <div class="feature-title">Cloud Roster</div>
+        <div class="feature-desc">Your child roster is stored securely in the cloud — accessible from any device, not just one browser.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <div class="feature-title">PDF Export</div>
+        <div class="feature-desc">Generate a clean, printable PDF of each completed note for your records and upload to ESDS.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📂</div>
+        <div class="feature-title">Notes History</div>
+        <div class="feature-desc">All completed notes are saved per child so you can review prior sessions at any time.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <div class="feature-title">HIPAA BAA</div>
+        <div class="feature-desc">A Business Associate Agreement is presented and signed before first use — required for HIPAA compliance.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GETTING STARTED -->
+  <div class="section" id="getting-started">
+    <div class="section-heading">
+      <div class="section-heading-icon">🚀</div>
+      Getting Started
+    </div>
+    <p class="prose">Access EI Session Notes through the <strong>Childhood Interventions Provider Hub</strong> at <strong>tools.childhoodinterventions.com</strong> — your email and password are all you need. The hub passes your license key automatically.</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Sign in to the Provider Hub</div>
+          <div class="step-desc">Go to <strong>tools.childhoodinterventions.com</strong> and enter your email and password. Click <em>Session Notes</em> from the dashboard — the tool opens with your license key pre-loaded.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Sign the Business Associate Agreement</div>
+          <div class="step-desc">On first use, you'll be presented with a HIPAA BAA. Enter your full legal name and organization name, check the confirmation box, and click <em>I Agree — Sign and Continue</em>. This is required by law and only done once.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Set up your provider profile</div>
+          <div class="step-desc">Enter your name, credentials (optional), and organization name. This information prints on every note PDF you generate. Click <em>Save and continue</em>.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Add your first child to the roster</div>
+          <div class="step-desc">From the Roster view, click <em>Add Child</em> and enter the child's name and date of birth. You can add more details later. Your roster is stored in secure cloud storage.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Already have a roster?</strong> If you previously used the tool and stored children in your browser, you'll be offered the chance to migrate that roster to cloud storage — choose <em>Migrate my roster</em> to make it available on any device.</div>
+    </div>
+  </div>
+
+  <!-- WRITING NOTES -->
+  <div class="section" id="writing-notes">
+    <div class="section-heading">
+      <div class="section-heading-icon">✍️</div>
+      Writing a Session Note
+    </div>
+    <p class="prose">Each session note documents an individual visit. The tool walks you through the required fields, then hands the information to AI to draft compliant note language.</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Select the child from your roster</div>
+          <div class="step-desc">Tap the child's name on the Roster screen, then choose <em>Start Session</em>. If you have a saved draft, you'll see an option to <em>Resume Draft</em> instead.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Fill in session details</div>
+          <div class="step-desc">Enter the session date, duration, location, EPIC and EI activity details, caregiver coaching provided, and child/family responses. Required ESDS fields are clearly marked.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Generate the note</div>
+          <div class="step-desc">When all required fields are complete, click <em>Generate Note</em>. The AI drafts a compliant session note based on your inputs — this usually takes 10–20 seconds.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Review and edit the draft</div>
+          <div class="step-desc">The generated note appears in a text editor. Read through it carefully, make any corrections or additions, and ensure it accurately reflects the session. <strong>You are the clinician — always review AI output.</strong></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Obtain caregiver signature and finalize</div>
+          <div class="step-desc">Hand the device to the caregiver to sign, then finalize and export the PDF. The completed note is saved to the child's history in the cloud.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-text"><strong>Always review AI-generated text.</strong> The AI drafts note language based on what you enter — but you are responsible for clinical accuracy. Edit anything that doesn't precisely reflect what happened in the session before finalizing.</div>
+    </div>
+  </div>
+
+  <!-- SIGNATURES -->
+  <div class="section" id="signatures">
+    <div class="section-heading">
+      <div class="section-heading-icon">✍️</div>
+      Caregiver Signatures
+    </div>
+    <p class="prose">The tool includes a built-in signature capture pad so caregivers can sign directly on your device — no paper forms or separate signature apps required.</p>
+
+    <!-- Illustration: signature pad -->
+    <div class="illustration">
+      <svg width="500" height="180" viewBox="0 0 500 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="60" y="20" width="380" height="140" rx="14" fill="#f8fafc" stroke="#e2eaf3" stroke-width="2"/>
+        <rect x="60" y="20" width="380" height="44" rx="14" fill="#09253d"/>
+        <rect x="60" y="48" width="380" height="16" rx="0" fill="#09253d"/>
+        <text x="250" y="48" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" font-weight="600" fill="white">Caregiver Signature</text>
+        <!-- Signature line -->
+        <line x1="100" y1="140" x2="420" y2="140" stroke="#e2eaf3" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <text x="100" y="158" font-family="DM Sans,sans-serif" font-size="11" fill="#8bafc8">Sign above</text>
+        <!-- Signature SVG path -->
+        <path d="M 120 125 C 130 110 145 108 150 120 C 155 132 165 105 180 115 C 190 122 195 118 205 108 C 215 98 220 112 230 118 C 240 124 250 100 265 110 C 275 117 280 125 290 120" stroke="#2d5a8a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Clear button -->
+        <rect x="380" y="68" width="50" height="24" rx="6" fill="#f0f4f8" stroke="#e2eaf3" stroke-width="1.5"/>
+        <text x="405" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">Clear</text>
+      </svg>
+    </div>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Hand your device to the caregiver</div>
+          <div class="step-desc">After reviewing the completed note, tap <em>Get Signature</em>. A full-screen signature pad appears — give the caregiver your phone or tablet to sign.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Caregiver signs with a finger or stylus</div>
+          <div class="step-desc">The caregiver draws their signature on the pad. If they make a mistake, they can tap <em>Clear</em> and try again.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Accept and embed the signature</div>
+          <div class="step-desc">Tap <em>Accept Signature</em> — the signature is embedded into the note PDF along with the date and time it was captured.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">ℹ️</div>
+      <div class="callout-text">Signatures are captured as image data embedded in the PDF. They are not transmitted or stored separately from the note record. A caregiver who declines to sign should be noted in the session narrative.</div>
+    </div>
+  </div>
+
+  <!-- SAVING -->
+  <div class="section" id="saving">
+    <div class="section-heading">
+      <div class="section-heading-icon">💾</div>
+      Saving &amp; Exporting
+    </div>
+    <p class="prose">Understanding how your notes are saved helps ensure you never lose work. The tool uses a combination of auto-save drafts and permanent cloud storage for completed notes.</p>
+
+    <table class="save-table">
+      <thead>
+        <tr><th>What</th><th>Where it's saved</th><th>When</th><th>PHI stored?</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Session draft</strong></td>
+          <td>Your browser (local)</td>
+          <td>Auto-saved as you type</td>
+          <td><span class="tag">Yes</span></td>
+        </tr>
+        <tr>
+          <td><strong>Child roster</strong></td>
+          <td>Secure cloud (KV store)</td>
+          <td>Immediately on save</td>
+          <td><span class="tag">Yes</span></td>
+        </tr>
+        <tr>
+          <td><strong>Completed notes</strong></td>
+          <td>Secure cloud (KV store)</td>
+          <td>On finalize</td>
+          <td><span class="tag">Yes</span></td>
+        </tr>
+        <tr>
+          <td><strong>Exported PDF</strong></td>
+          <td>Your device (download)</td>
+          <td>On demand</td>
+          <td><span class="tag">Yes</span></td>
+        </tr>
+        <tr>
+          <td><strong>License key</strong></td>
+          <td>Session storage (browser tab)</td>
+          <td>On login</td>
+          <td><span class="tag tag-no">No</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Draft auto-save:</strong> If you close the tab mid-session, your in-progress draft is preserved in your browser. The next time you open the child's record, you'll be offered the option to <em>Resume Draft</em>. This draft lives in your browser only — clearing browser data will erase it.</div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">📥</div>
+      <div class="callout-text"><strong>Exporting a PDF:</strong> After finalizing a note, click <em>Download PDF</em>. Save the file to a HIPAA-compliant location (e.g., your organization's encrypted drive) and upload to ESDS as required. Do not store note PDFs in personal cloud storage (Google Drive personal, Dropbox, iCloud) unless those services have a signed BAA with your organization.</div>
+    </div>
+  </div>
+
+  <!-- HIPAA -->
+  <div class="section" id="hipaa">
+    <div class="section-heading">
+      <div class="section-heading-icon">🔐</div>
+      HIPAA &amp; Privacy
+    </div>
+
+    <div class="callout callout-hipaa">
+      <div class="callout-icon">🛡️</div>
+      <div class="callout-text">
+        <strong>This tool operates under a signed Business Associate Agreement (BAA)</strong><br>
+        Childhood Interventions, LLC serves as a Business Associate under HIPAA. Before your first session note, you sign a BAA that establishes the legal framework for handling Protected Health Information (PHI). Your organization remains the Covered Entity responsible for patient data under HIPAA.
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔑</div>
+        <div class="feature-title">Access Control</div>
+        <div class="feature-desc">Access requires a valid license key verified against our server. No key = no access to the tool or any child data.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗄️</div>
+        <div class="feature-title">Encrypted Storage</div>
+        <div class="feature-desc">Child rosters and completed notes are stored in an encrypted cloud key-value store. Data is not visible to any other provider or organization.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">Encrypted Transit</div>
+        <div class="feature-desc">All data transferred between your browser and our servers is encrypted via HTTPS/TLS. Never transmitted over unencrypted connections.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-title">AI &amp; PHI</div>
+        <div class="feature-desc">The AI generation process uses your session inputs. Do not include full child names or SSNs in free-text fields — use initials and child IDs instead.</div>
+      </div>
+    </div>
+
+    <p class="prose" style="margin-top: 20px;"><strong>Your responsibilities as the provider:</strong></p>
+    <ul style="font-size:15px; color:var(--ink); line-height:2; padding-left:24px; margin-bottom:16px;">
+      <li>Use the tool only on devices you control and that have screen-lock enabled.</li>
+      <li>Do not share your license key with anyone outside your organization.</li>
+      <li>Store downloaded PDFs only in HIPAA-compliant locations.</li>
+      <li>Report any suspected unauthorized access to <a href="mailto:privacy@childhoodinterventions.com">privacy@childhoodinterventions.com</a> immediately.</li>
+      <li>Do not photograph or screen-record session note screens in unsecured environments.</li>
+    </ul>
+  </div>
+
+  <!-- ROSTER -->
+  <div class="section" id="roster">
+    <div class="section-heading">
+      <div class="section-heading-icon">👨‍👩‍👦</div>
+      Managing Your Roster
+    </div>
+    <p class="prose">Your cloud roster keeps all the children you serve in one place. Roster data is stored per your license key, so it's available on any device you sign in from.</p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">+</div>
+        <div class="step-content">
+          <div class="step-title">Adding a child</div>
+          <div class="step-desc">Click <em>Add Child</em> on the Roster screen. Enter the child's name and date of birth. Other details (auth dates, diagnosis, etc.) can be added or edited later.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">✏️</div>
+        <div class="step-content">
+          <div class="step-title">Editing a child record</div>
+          <div class="step-desc">Tap the child's name to open their record. Use the Edit button to update any information. Changes save immediately to the cloud.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">📂</div>
+        <div class="step-content">
+          <div class="step-title">Viewing note history</div>
+          <div class="step-desc">Tap <em>View Notes</em> from any child's card to see all completed notes. You can re-download any prior PDF from this view.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">🗑️</div>
+        <div class="step-content">
+          <div class="step-title">Removing a child</div>
+          <div class="step-desc">Open the child's record and choose <em>Remove from roster</em>. This removes the child from your active roster but does not permanently delete completed note records (retained per your BAA).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="section" id="tips">
+    <div class="section-heading">
+      <div class="section-heading-icon">💡</div>
+      Tips &amp; Best Practices
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Use specific inputs</div>
+        <div class="feature-desc">The more specific your session details, the better the AI draft. Include specific activities, targets, and responses — not just "practiced walking."</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">Works on phones</div>
+        <div class="feature-desc">The tool is fully mobile-responsive. You can complete the entire workflow — entry, AI generation, signature, PDF — on your smartphone.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <div class="feature-title">Multiple devices</div>
+        <div class="feature-desc">Your roster and completed notes sync across devices. Start a note on your phone in the field; finish it on your laptop at home.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📤</div>
+        <div class="feature-title">Upload PDFs promptly</div>
+        <div class="feature-desc">Upload completed note PDFs to ESDS within your organization's required timeframe. The tool doesn't auto-submit to ESDS — that step is yours.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="guide-footer">
+  <strong>Childhood Interventions, LLC</strong> · childhoodinterventions.com<br>
+  Questions? <a href="mailto:support@childhoodinterventions.com">support@childhoodinterventions.com</a> · <a href="mailto:privacy@childhoodinterventions.com">privacy@childhoodinterventions.com</a> (HIPAA &amp; privacy inquiries)<br>
+  © 2025 Childhood Interventions, LLC. All rights reserved.
+</div>
+
+</body>
+</html>
