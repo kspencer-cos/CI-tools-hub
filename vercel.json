@@ -6,8 +6,10 @@
     { "src": "guides/**", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/auth",     "dest": "/api/auth.js" },
-    { "src": "/api/add-user", "dest": "/api/add-user.js" },
+    { "src": "/api/auth",             "dest": "/api/auth.js" },
+    { "src": "/api/add-user",         "dest": "/api/add-user.js" },
+    { "src": "/api/gumroad-webhook",  "dest": "/api/gumroad-webhook.js" },
+    { "src": "/api/pending-welcomes", "dest": "/api/pending-welcomes.js" },
     { "src": "/guides/(.*)", "dest": "/guides/$1" },
     { "src": "/(.*)",         "dest": "/index.html" }
   ]
