@@ -110,10 +110,11 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
       <li><a href="#access"><span class="toc-num">02</span> Accessing the Tool</a></li>
       <li><a href="#rating-scale"><span class="toc-num">03</span> The 7-Point Rating Scale</a></li>
       <li><a href="#completing"><span class="toc-num">04</span> Completing a COS</a></li>
-      <li><a href="#narratives"><span class="toc-num">05</span> AI-Generated Narratives</a></li>
-      <li><a href="#progress"><span class="toc-num">06</span> Tracking Progress Over Time</a></li>
-      <li><a href="#saving"><span class="toc-num">07</span> Saving &amp; Exporting</a></li>
-      <li><a href="#hipaa"><span class="toc-num">08</span> HIPAA &amp; Privacy</a></li>
+      <li><a href="#exit-cos"><span class="toc-num">05</span> Exit COS</a></li>
+      <li><a href="#narratives"><span class="toc-num">06</span> AI-Generated Narratives</a></li>
+      <li><a href="#progress"><span class="toc-num">07</span> Tracking Progress Over Time</a></li>
+      <li><a href="#saving"><span class="toc-num">08</span> Saving &amp; Exporting</a></li>
+      <li><a href="#hipaa"><span class="toc-num">09</span> HIPAA &amp; Privacy</a></li>
     </ul>
   </div>
 
@@ -191,13 +192,13 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
     <p class="prose">COS ratings use a 7-point scale defined by federal Early Intervention guidelines. The tool includes anchor descriptions and decision guidance to help teams select the most accurate rating.</p>
 
     <div class="rating-scale">
-      <div class="rating-box r1"><div class="rnum">1</div><div class="rdesc">Does not yet show skills</div></div>
-      <div class="rating-box r2"><div class="rnum">2</div><div class="rdesc">Between 1 and 3</div></div>
-      <div class="rating-box r3"><div class="rnum">3</div><div class="rdesc">Emerging age-appropriate skills</div></div>
-      <div class="rating-box r4"><div class="rnum">4</div><div class="rdesc">Between 3 and 5</div></div>
-      <div class="rating-box r5"><div class="rnum">5</div><div class="rdesc">Age-appropriate skills</div></div>
-      <div class="rating-box r6"><div class="rnum">6</div><div class="rdesc">Between 5 and 7</div></div>
-      <div class="rating-box r7"><div class="rnum">7</div><div class="rdesc">Age-appropriate + above age</div></div>
+      <div class="rating-box r1"><div class="rnum">1</div><div class="rdesc">Child does not yet show skills in this area</div></div>
+      <div class="rating-box r2"><div class="rnum">2</div><div class="rdesc">Child shows a few early skills but they are not yet immediate foundational skills</div></div>
+      <div class="rating-box r3"><div class="rnum">3</div><div class="rdesc">Child shows some immediate foundational skills but not all — skills not age-appropriate</div></div>
+      <div class="rating-box r4"><div class="rnum">4</div><div class="rdesc">Child shows some age-appropriate skills but not consistently or across settings</div></div>
+      <div class="rating-box r5"><div class="rnum">5</div><div class="rdesc">Child's skills are age-appropriate and consistent across settings and situations</div></div>
+      <div class="rating-box r6"><div class="rnum">6</div><div class="rdesc">Child shows age-appropriate skills and some skills beyond age expectations</div></div>
+      <div class="rating-box r7"><div class="rnum">7</div><div class="rdesc">Child's skills are well beyond age expectations across all settings and situations</div></div>
     </div>
 
     <div class="callout callout-tip">
@@ -207,7 +208,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
 
     <div class="callout callout-info">
       <div class="callout-icon">📊</div>
-      <div class="callout-text"><strong>Progress indicators:</strong> For annual and exit COS, the tool also calculates the progress indicator (a, b, c) by comparing entry and current ratings. This is automatically computed when both ratings are entered.</div>
+      <div class="callout-text"><strong>Progress indicators:</strong> For exit COS, the tool calculates the progress indicator (a, b, c) by comparing entry and exit ratings. This is automatically computed when both ratings are entered.</div>
     </div>
   </div>
 
@@ -220,7 +221,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
         <div class="step-num">1</div>
         <div class="step-content">
           <div class="step-title">Select or add the child</div>
-          <div class="step-desc">Choose the child from your roster or add a new child record. Enter the child's initials (or first name only) and date of birth. The COS type (entry, periodic, exit) is selected here.</div>
+          <div class="step-desc">Choose the child from your roster or add a new child record. Enter the child's initials (or first name only) and date of birth. The COS type (entry or exit) is selected here.</div>
         </div>
       </div>
       <div class="step-card">
@@ -256,6 +257,75 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
     <div class="callout callout-warn">
       <div class="callout-icon">⚠️</div>
       <div class="callout-text"><strong>Team consensus required:</strong> Florida Early Steps requires COS ratings to reflect team consensus. The tool supports documentation of the discussion, but the rating entered should reflect the full IFSP team's agreed-upon score — not one person's opinion.</div>
+    </div>
+
+    <!-- Entry COS Example -->
+    <div class="callout callout-info" style="margin-top:28px;">
+      <div class="callout-icon">📝</div>
+      <div class="callout-text">
+        <strong>Entry COS example — Outcome A (Social-Emotional)</strong><br>
+        <em>Child: 18-month-old, referred for speech delay</em><br><br>
+        <strong>Evidence entered:</strong> "Child makes eye contact and smiles when greeted. Reaches up to be held and calms when comforted by familiar caregiver. Does not yet point to request items or show shared attention with objects. Parallel play observed — does not initiate joint play with peers."<br><br>
+        <strong>Rating selected: 3</strong> — Child shows some foundational skills (emotional reciprocity, attachment) but lacks key age-expected skills (joint attention, intentional communication, peer engagement).<br><br>
+        <strong>AI-generated narrative:</strong> "At entry, [child] demonstrates emerging social-emotional skills consistent with a rating of 3. Strengths include appropriate emotional reciprocity and caregiver attachment. Joint attention and intentional social communication are not yet present at age-expected levels and represent priority areas for early intervention."
+      </div>
+    </div>
+  </div>
+
+  <!-- EXIT COS -->
+  <div class="section" id="exit-cos">
+    <div class="section-heading"><div class="section-heading-icon">🏁</div>Exit COS</div>
+    <p class="prose">An exit COS is completed when a child transitions out of Early Steps — either at age 3 or when services are discontinued. The exit COS is compared to the entry COS to calculate the federal <strong>progress indicator</strong> (a, b, or c) for each outcome area.</p>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Progress indicator is automatic:</strong> When you select "Exit" as the COS type, the tool will load the child's entry ratings and calculate the progress indicator once exit ratings are entered. No manual calculation needed.</div>
+    </div>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Select the child and choose "Exit" as the COS type</div>
+          <div class="step-desc">The tool loads the child's entry ratings for reference. You'll see entry scores displayed alongside the rating scale as you score each outcome area.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Drop in session notes or progress summaries</div>
+          <div class="step-desc">Use the drop zone below to drag and drop session notes, progress summaries, or evaluation reports. The AI reads these documents to help generate evidence-based exit narratives — saving you from rewriting what's already documented.</div>
+          <div style="margin-top:16px;border:2px dashed var(--sky);border-radius:12px;padding:24px;text-align:center;background:var(--ice);color:var(--blue);">
+            <div style="font-size:28px;margin-bottom:8px;">📂</div>
+            <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Drop session notes or progress summaries here</div>
+            <div style="font-size:12px;color:var(--mid);">PDF or text files · Multiple files accepted · AI reads all uploaded content</div>
+          </div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Score each outcome area at exit</div>
+          <div class="step-desc">Rate each of the three outcomes using the 7-point scale. The entry rating is shown for comparison. Add any evidence not captured in the uploaded notes.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Generate exit narratives and progress indicators</div>
+          <div class="step-desc">Click <em>Generate Narratives</em>. The AI uses your uploaded notes, entered evidence, entry ratings, and exit ratings to produce a narrative that describes growth since enrollment. Progress indicators (a, b, c) are calculated and included in the export.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">📊</div>
+      <div class="callout-text">
+        <strong>Progress indicator key:</strong><br>
+        <strong>a</strong> — Child did not show or showed less growth than same-age peers<br>
+        <strong>b</strong> — Child showed growth but did not reach age expectations<br>
+        <strong>c</strong> — Child reached or surpassed age-expected skills
+      </div>
     </div>
   </div>
 

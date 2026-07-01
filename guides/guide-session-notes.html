@@ -332,7 +332,7 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
         <rect x="182" y="30" width="130" height="100" rx="12" fill="#ddeeff" stroke="#4a8cc4" stroke-width="1.5"/>
         <text x="247" y="68" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="24">📝</text>
         <text x="247" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#09253d">Log Session</text>
-        <text x="247" y="110" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">EPIC + EI details</text>
+        <text x="247" y="110" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#5a7a96">FLEPIC + EI details</text>
         <!-- Arrow -->
         <path d="M317 80 L340 80" stroke="#8bafc8" stroke-width="2" stroke-dasharray="4 3"/>
         <polygon points="340,75 350,80 340,85" fill="#8bafc8"/>
@@ -451,7 +451,7 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
         <div class="step-num">2</div>
         <div class="step-content">
           <div class="step-title">Fill in session details</div>
-          <div class="step-desc">Enter the session date, duration, location, EPIC and EI activity details, caregiver coaching provided, and child/family responses. Required ESDS fields are clearly marked.</div>
+          <div class="step-desc">Enter the session date, duration, location, FLEPIC and EI activity details, caregiver coaching provided, and child/family responses. Required ESDS fields are clearly marked.</div>
         </div>
       </div>
       <div class="step-card">
@@ -471,8 +471,8 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
       <div class="step-card">
         <div class="step-num">5</div>
         <div class="step-content">
-          <div class="step-title">Obtain caregiver signature and finalize</div>
-          <div class="step-desc">Hand the device to the caregiver to sign, then finalize and export the PDF. The completed note is saved to the child's history in the cloud.</div>
+          <div class="step-title">Collect signatures and download the PDF</div>
+          <div class="step-desc">You sign first, then hand the device to the caregiver to sign. Once both signatures are in place, click <em>Download PDF</em> to save the completed note to your device.</div>
         </div>
       </div>
     </div>
@@ -513,29 +513,36 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
       <div class="step-card">
         <div class="step-num">1</div>
         <div class="step-content">
-          <div class="step-title">Hand your device to the caregiver</div>
-          <div class="step-desc">After reviewing the completed note, tap <em>Get Signature</em>. A full-screen signature pad appears — give the caregiver your phone or tablet to sign.</div>
+          <div class="step-title">Check the review checkbox</div>
+          <div class="step-desc">Before signatures are enabled, check the box confirming you have reviewed and approve the AI-generated note. This unlocks the signature fields and the Download button.</div>
         </div>
       </div>
       <div class="step-card">
         <div class="step-num">2</div>
         <div class="step-content">
-          <div class="step-title">Caregiver signs with a finger or stylus</div>
-          <div class="step-desc">The caregiver draws their signature on the pad. If they make a mistake, they can tap <em>Clear</em> and try again.</div>
+          <div class="step-title">You sign first</div>
+          <div class="step-desc">Draw your provider signature in the signature box. Your name appears as the label above it.</div>
         </div>
       </div>
       <div class="step-card">
         <div class="step-num">3</div>
         <div class="step-content">
-          <div class="step-title">Accept and embed the signature</div>
-          <div class="step-desc">Tap <em>Accept Signature</em> — the signature is embedded into the note PDF along with the date and time it was captured.</div>
+          <div class="step-title">Type the caregiver's printed name</div>
+          <div class="step-desc">Enter the caregiver's name in the printed name field below your signature.</div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Hand the device to the caregiver to sign</div>
+          <div class="step-desc">The caregiver draws their signature in the caregiver signature box below. If they make a mistake, they can tap <em>Clear</em> and try again. Signing is the action — there is no separate Accept button.</div>
         </div>
       </div>
     </div>
 
     <div class="callout callout-info">
       <div class="callout-icon">ℹ️</div>
-      <div class="callout-text">Signatures are captured as image data embedded in the PDF. They are not transmitted or stored separately from the note record. A caregiver who declines to sign should be noted in the session narrative.</div>
+      <div class="callout-text">Both signatures are embedded in the PDF when you click <em>Download PDF</em>. The <strong>session date</strong> appears next to each signature — not the time of signing. Signatures are not stored separately from the PDF. A caregiver who declines to sign should be noted in the session narrative.</div>
     </div>
   </div>
 
@@ -545,7 +552,7 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
       <div class="section-heading-icon">💾</div>
       Saving &amp; Exporting
     </div>
-    <p class="prose">Understanding how your notes are saved helps ensure you never lose work. The tool uses a combination of auto-save drafts and permanent cloud storage for completed notes.</p>
+    <p class="prose">Understanding how your notes are saved helps ensure you never lose work. Drafts stay in your browser automatically; completed PDFs live on your device or optionally in Google Drive.</p>
 
     <table class="save-table">
       <thead>
@@ -554,8 +561,8 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
       <tbody>
         <tr>
           <td><strong>Session draft</strong></td>
-          <td>Your browser (local)</td>
-          <td>Auto-saved as you type</td>
+          <td>Your browser (localStorage)</td>
+          <td>Auto-saved every 30 seconds</td>
           <td><span class="tag">Yes</span></td>
         </tr>
         <tr>
@@ -565,15 +572,21 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
           <td><span class="tag">Yes</span></td>
         </tr>
         <tr>
-          <td><strong>Completed notes</strong></td>
-          <td>Secure cloud (KV store)</td>
-          <td>On finalize</td>
+          <td><strong>Completed note PDF</strong></td>
+          <td>Your device (download)</td>
+          <td>When you click Download PDF</td>
           <td><span class="tag">Yes</span></td>
         </tr>
         <tr>
-          <td><strong>Exported PDF</strong></td>
-          <td>Your device (download)</td>
-          <td>On demand</td>
+          <td><strong>Save to Drive</strong></td>
+          <td>Your Google Drive + 7-day family link</td>
+          <td>When you click Save to Drive &amp; get family link</td>
+          <td><span class="tag">Yes</span></td>
+        </tr>
+        <tr>
+          <td><strong>ESDS billing log</strong></td>
+          <td>Your Google Sheet (CONT or Medicaid tab)</td>
+          <td>When you click Log for ESDS submission</td>
           <td><span class="tag">Yes</span></td>
         </tr>
         <tr>
@@ -592,7 +605,12 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
 
     <div class="callout callout-tip">
       <div class="callout-icon">📥</div>
-      <div class="callout-text"><strong>Exporting a PDF:</strong> After finalizing a note, click <em>Download PDF</em>. Save the file to a HIPAA-compliant location (e.g., your organization's encrypted drive) and upload to ESDS as required. Do not store note PDFs in personal cloud storage (Google Drive personal, Dropbox, iCloud) unless those services have a signed BAA with your organization.</div>
+      <div class="callout-text"><strong>Downloading a PDF:</strong> Click <em>Download PDF</em> after reviewing and signing. The draft clears automatically after download. Save the file to a HIPAA-compliant location and upload to ESDS as required. Do not store note PDFs in personal cloud storage (Google Drive personal, Dropbox, iCloud) unless those services have a signed BAA with your organization.</div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">🔗</div>
+      <div class="callout-text"><strong>Save to Drive &amp; get family link:</strong> This optionally uploads the PDF to your Google Drive and generates a link you can share with the family — the link expires after 7 days.</div>
     </div>
   </div>
 
@@ -620,7 +638,7 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--slate); 
       <div class="feature-card">
         <div class="feature-icon">🗄️</div>
         <div class="feature-title">Encrypted Storage</div>
-        <div class="feature-desc">Child rosters and completed notes are stored in an encrypted cloud key-value store. Data is not visible to any other provider or organization.</div>
+        <div class="feature-desc">Child rosters are stored in an encrypted cloud key-value store. Completed note PDFs are downloaded to your device — they are not stored on our servers.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🌐</div>

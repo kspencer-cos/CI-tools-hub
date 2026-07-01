@@ -166,12 +166,12 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
       <div class="feature-card">
         <div class="feature-icon">📅</div>
         <div class="feature-title">Weekly Schedule</div>
-        <div class="feature-desc">Live calendar view pulled from Google Calendar — shows session status including Apptoto confirmation state.</div>
+        <div class="feature-desc">Live calendar view pulled from Google Calendar — shows your current week with color-coded session status.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📝</div>
         <div class="feature-title">Log Sessions</div>
-        <div class="feature-desc">Log EPIC and EI session pairs directly to your CONT tab in Google Sheets from within the app — no manual spreadsheet editing.</div>
+        <div class="feature-desc">Log FLEPIC and EI session pairs directly to your CONT and Medicaid tabs in Google Sheets from within the app — no manual spreadsheet editing.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🚗</div>
@@ -291,7 +291,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
   <!-- SCHEDULE -->
   <div class="section" id="schedule">
     <div class="section-heading"><div class="section-heading-icon">📅</div>Schedule &amp; Calendar</div>
-    <p class="prose">The Schedule tab shows your current week pulled live from Google Calendar. Sessions are color-coded and show Apptoto confirmation status when available.</p>
+    <p class="prose">The Schedule tab shows your current week pulled live from Google Calendar. Sessions are color-coded by status.</p>
     <div class="callout callout-tip">
       <div class="callout-icon">💡</div>
       <div class="callout-text">The calendar reads from <strong>the Google account that owns your linked spreadsheet</strong>. Use the same calendar for all Early Steps sessions so all events appear here.</div>
@@ -301,7 +301,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
   <!-- SESSIONS -->
   <div class="section" id="sessions">
     <div class="section-heading"><div class="section-heading-icon">📝</div>Logging Sessions</div>
-    <p class="prose">Use <em>Add Session</em> or <em>Log Session</em> to record EPIC and EI session pairs directly into your CONT tab without opening Google Sheets.</p>
+    <p class="prose">Use <em>Add Session</em> or <em>Log Session</em> to record FLEPIC and EI session pairs directly into your CONT and Medicaid tabs without opening Google Sheets.</p>
     <div class="steps">
       <div class="step-card">
         <div class="step-num">1</div>
@@ -314,14 +314,14 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
         <div class="step-num">2</div>
         <div class="step-content">
           <div class="step-title">Fill in session details</div>
-          <div class="step-desc">Enter the session date, duration, session type (EPIC or EI), location, and billing codes. Both EPIC and EI entries for the same visit can be logged together.</div>
+          <div class="step-desc">Enter the session date, duration, session type (FLEPIC or EI), location, and billing codes. Both FLEPIC and EI entries for the same visit can be logged together.</div>
         </div>
       </div>
       <div class="step-card">
         <div class="step-num">3</div>
         <div class="step-content">
           <div class="step-title">Submit</div>
-          <div class="step-desc">Click <em>Log Session</em>. The Apps Script writes the new row(s) directly to your CONT tab. You'll see a confirmation when it's saved.</div>
+          <div class="step-desc">Click <em>Log Session</em>. The app writes the new row(s) directly to your CONT and Medicaid tabs. You'll see a confirmation when it's saved.</div>
         </div>
       </div>
     </div>
@@ -330,7 +330,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--slate);color:va
   <!-- TRAVEL -->
   <div class="section" id="travel">
     <div class="section-heading"><div class="section-heading-icon">🚗</div>Travel Vouchers</div>
-    <p class="prose">The Travel Voucher feature auto-calculates mileage from your Google Calendar event locations and generates a printable voucher at the current IRS mileage rate ($0.70/mile for 2025).</p>
+    <p class="prose">The Travel Voucher feature auto-calculates mileage from your Google Calendar event locations and generates a printable voucher at the Florida Early Steps reimbursement rate (44.5 cents/mile).</p>
     <div class="steps">
       <div class="step-card">
         <div class="step-num">1</div>
