@@ -482,6 +482,56 @@
 
     .section-label:first-of-type { margin-top: 0; }
 
+    /* ── ADMIN PANEL ── */
+    #admin-screen {
+      display: none;
+      min-height: 100vh;
+      background: linear-gradient(160deg, #1a0a2e 0%, #2d1b4e 100%);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .admin-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .admin-card h1 { font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .admin-card > p { font-size: 13px; color: var(--mid); margin-bottom: 24px; }
+    .admin-field { margin-bottom: 14px; }
+
+    .tools-checkboxes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+
+    .tool-check {
+      display: flex; align-items: center; gap: 5px;
+      background: var(--slate); border: 1.5px solid var(--mist);
+      border-radius: 6px; padding: 5px 10px; cursor: pointer;
+      font-size: 12px; font-weight: 500; color: var(--ink);
+      user-select: none; transition: border-color 0.15s, background 0.15s;
+    }
+    .tool-check input { cursor: pointer; }
+    .tool-check:has(input:checked) { border-color: var(--blue); background: var(--ice); color: var(--blue); }
+
+    .admin-btn {
+      width: 100%; margin-top: 20px; padding: 13px;
+      background: #2d1b4e; color: var(--white); border: none;
+      border-radius: 8px; font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s;
+    }
+    .admin-btn:hover { background: #4a2d7a; }
+
+    .admin-result {
+      display: none; margin-top: 14px; padding: 10px 14px;
+      border-radius: 8px; font-size: 13px; font-weight: 500;
+    }
+    .admin-result.ok  { background: var(--green-bg); color: var(--green); }
+    .admin-result.err { background: #fef2f2; color: #b91c1c; }
+
     /* ── MOBILE ── */
     @media (max-width: 600px) {
       .topbar { padding: 0 16px; }
@@ -489,6 +539,7 @@
       .login-card { padding: 32px 24px; }
       .tools-grid { grid-template-columns: 1fr; }
       .topbar-plan { display: none; }
+      .admin-card { padding: 28px 20px; }
     }
   </style>
 </head>
@@ -597,6 +648,45 @@
       </div>
       <button class="key-copy" id="key-copy-btn">Copy</button>
     </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ADMIN PANEL
+══════════════════════════════════════ -->
+<div id="admin-screen">
+  <div class="admin-card">
+    <h1>🔐 User Management</h1>
+    <p>Add or update a Hub user. Leave password blank to keep the existing one.</p>
+    <div class="admin-field">
+      <label class="field-label" for="admin-secret">Admin secret</label>
+      <input class="field-input" id="admin-secret" type="password" placeholder="Admin secret" />
+    </div>
+    <div class="admin-field">
+      <label class="field-label" for="admin-name">Full name</label>
+      <input class="field-input" id="admin-name" type="text" placeholder="Jane Smith" />
+    </div>
+    <div class="admin-field">
+      <label class="field-label" for="admin-email">Email</label>
+      <input class="field-input" id="admin-email" type="email" placeholder="jane@example.com" autocapitalize="none" />
+    </div>
+    <div class="admin-field">
+      <label class="field-label" for="admin-password">Password <span style="font-weight:400;text-transform:none;letter-spacing:0">(blank = keep existing)</span></label>
+      <input class="field-input" id="admin-password" type="text" placeholder="Temporary password" />
+    </div>
+    <div class="admin-field">
+      <label class="field-label">Tools access</label>
+      <div class="tools-checkboxes">
+        <label class="tool-check"><input type="checkbox" value="cos" checked /> COS Tool</label>
+        <label class="tool-check"><input type="checkbox" value="reviews" /> Reviews</label>
+        <label class="tool-check"><input type="checkbox" value="notes" /> Session Notes</label>
+        <label class="tool-check"><input type="checkbox" value="management" /> Management</label>
+        <label class="tool-check"><input type="checkbox" value="library" /> Library</label>
+        <label class="tool-check"><input type="checkbox" value="flepic" /> FL-EPIC Guide</label>
+      </div>
+    </div>
+    <button class="admin-btn" id="admin-save-btn">Add / Update User</button>
+    <div class="admin-result" id="admin-result"></div>
   </div>
 </div>
 
@@ -821,6 +911,60 @@ document.getElementById('signout-btn').addEventListener('click', () => {
   document.getElementById('login-error').style.display = 'none';
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('login-screen').style.display = 'flex';
+});
+
+// ══════════════════════════════════════════
+// ADMIN PANEL
+// ══════════════════════════════════════════
+if (new URLSearchParams(window.location.search).has('admin')) {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-screen').style.display = 'flex';
+}
+
+document.getElementById('admin-save-btn').addEventListener('click', async () => {
+  const secret   = document.getElementById('admin-secret').value.trim();
+  const name     = document.getElementById('admin-name').value.trim();
+  const email    = document.getElementById('admin-email').value.trim();
+  const password = document.getElementById('admin-password').value.trim();
+  const tools    = [...document.querySelectorAll('.tools-checkboxes input:checked')].map(el => el.value);
+  const resultEl = document.getElementById('admin-result');
+  const btn      = document.getElementById('admin-save-btn');
+
+  if (!secret || !name || !email || !tools.length) {
+    resultEl.className = 'admin-result err';
+    resultEl.textContent = 'Secret, name, email, and at least one tool are required.';
+    resultEl.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Saving…';
+  btn.disabled = true;
+  resultEl.style.display = 'none';
+
+  try {
+    const body = { secret, action: 'upsert', name, email, tools };
+    if (password) body.password = password;
+    const res  = await fetch('/api/add-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    resultEl.className = 'admin-result ' + (data.ok ? 'ok' : 'err');
+    resultEl.textContent = data.ok ? `✓ ${data.message}` : `Error: ${data.error}`;
+    if (data.ok) {
+      document.getElementById('admin-name').value = '';
+      document.getElementById('admin-email').value = '';
+      document.getElementById('admin-password').value = '';
+    }
+  } catch {
+    resultEl.className = 'admin-result err';
+    resultEl.textContent = 'Network error — please try again.';
+  } finally {
+    resultEl.style.display = 'block';
+    btn.textContent = 'Add / Update User';
+    btn.disabled = false;
+  }
 });
 
 // ══════════════════════════════════════════
