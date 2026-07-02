@@ -673,16 +673,17 @@
     <div class="admin-field">
       <label class="field-label" for="admin-password">Password <span style="font-weight:400;text-transform:none;letter-spacing:0">(blank = keep existing)</span></label>
       <input class="field-input" id="admin-password" type="text" placeholder="Temporary password" />
+      <div style="font-size:11px;color:var(--mid);margin-top:5px;">To reset a password: enter their email, set a new password, and save. Name and tools will stay the same.</div>
     </div>
     <div class="admin-field">
       <label class="field-label">Tools access</label>
       <div class="tools-checkboxes">
         <label class="tool-check"><input type="checkbox" value="cos" checked /> COS Tool</label>
-        <label class="tool-check"><input type="checkbox" value="reviews" /> Reviews</label>
-        <label class="tool-check"><input type="checkbox" value="notes" /> Session Notes</label>
-        <label class="tool-check"><input type="checkbox" value="management" /> Management</label>
-        <label class="tool-check"><input type="checkbox" value="library" /> Library</label>
-        <label class="tool-check"><input type="checkbox" value="flepic" /> FL-EPIC Guide</label>
+        <label class="tool-check"><input type="checkbox" value="reviews" checked /> Reviews</label>
+        <label class="tool-check"><input type="checkbox" value="notes" checked /> Session Notes</label>
+        <label class="tool-check"><input type="checkbox" value="management" checked /> Management</label>
+        <label class="tool-check"><input type="checkbox" value="library" checked /> Library</label>
+        <label class="tool-check"><input type="checkbox" value="flepic" checked /> FL-EPIC Guide</label>
       </div>
     </div>
     <button class="admin-btn" id="admin-save-btn">Add / Update User</button>
